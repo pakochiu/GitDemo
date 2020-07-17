@@ -1,0 +1,211 @@
+﻿@model IEnumerable<WebApplication2.tEmployee>
+@{
+    int count = 0;
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+    var EmpDepmant = Session[WebApplication2.Models.EmpDitctionary.SK_Login_Deptment].ToString();
+    var EmpJobtitel = Session[WebApplication2.Models.EmpDitctionary.SK_Login_Jobtitel].ToString();
+
+}
+<h2 style="text-align:center">人事資料</h2>
+@{if (EmpDepmant == "2")
+    {
+        <a href="~/Employees/Employeeslist" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="Employees">應徵人員</a>
+    }
+    else
+    {
+        <a href="~/Employees/notinlist" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" id="Employees">新進人員</a>
+    }
+
+}
+
+<table class="table table-hover table-striped display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                編號
+            </th>
+            <th scope="col">
+                姓名
+            </th>
+            <th scope="col">
+                生日
+            </th>
+            <th scope="col">
+                性別
+            </th>
+            <th scope="col">
+                所屬部門
+            </th>
+            <th scope="col">
+                職位
+            </th>
+            <th scope="col">
+                雇用日期
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    @{
+                        string birthday = "";
+                        if (item.fBirthday != null)
+                        {
+                            birthday = item.fBirthday.Value.ToString("yyyy/MM/dd");
+                        }
+                        else
+                        {
+                            birthday = null;
+                        }
+                    }
+                    @birthday
+
+                </td>
+                <td>
+                    @{
+                        string Gender = "";
+
+                        if (item.fGender == null)
+                        {
+                            Gender = "未選擇";
+                        }
+                        else if (item.fGender.ToString() == "M")
+                        {
+                            Gender = "男性";
+                        }
+                        else
+                        {
+                            Gender = "女姓";
+                        }
+                    }
+                    @Html.Label(Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tDepartment.fDepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tJobTitle.fTitleName)
+                </td>
+                <td>
+                    @{
+                        string Hireday = "";
+                        if (item.fHireDate != null)
+                        {
+                            Hireday = item.fHireDate.Value.ToString("yyyy/MM/dd");
+                        }
+                        else
+                        {
+                            Hireday = null;
+                        }
+                    }
+                    @Hireday
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary emp" data-toggle="modal" data-target="#@item.fEmployeeID">詳細</button>
+                    <div class="modal fade" id=@item.fEmployeeID tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class=" modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">個人詳細資料</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @*彈出視窗的內文*@
+                                    <div class="form-group">
+                                        姓名
+                                        <div class="col-xl-10 form-control">
+                                            @Html.DisplayFor(modelitrem => item.fName, "", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        生日
+                                        <div class="col-md-10 form-control">
+                                            @birthday
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        性別
+                                        <div class="col-md-10 form-control">
+                                            @Gender
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        電話
+                                        <div class="col-md-10 form-control ">
+                                            @Html.DisplayFor(modelitem => item.fPhone)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        地址
+                                        <div class="col-md-10 form-control">
+                                            @Html.DisplayFor(modelitem => item.fAddress)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        電子郵件
+                                        <div class="col-md-10 form-control">
+                                            @Html.DisplayFor(modelitem => item.fEmail)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        所屬部門
+                                        <div class="col-md-10 form-control">
+                                            @Html.DisplayFor(modelitem => item.tDepartment.fDepartmentName)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        職位
+                                        <div class="col-md-10 form-control">
+                                            @Html.DisplayFor(modelitem => item.tJobTitle.fTitleName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @{
+                                        if (EmpJobtitel == "1" || EmpJobtitel == "0"||EmpDepmant !="2")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("編輯資訊", "EmpEdit", new { id = item.fEmployeeID }, new { @type = "button", @class = "btn btn-primary" })
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../../assets/extra-libs/DataTables/datatables.min.js"></script>
+<script>
+    $('table.display').DataTable();
+
+    var emp = document.getElementById("Employees")
+
+</script>
+
+

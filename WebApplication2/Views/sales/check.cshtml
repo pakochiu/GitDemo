@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApplication2.tCheck>
+
+@{
+    ViewBag.Title = "check";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<h2 style="text-align: center">付款狀況</h2>
+
+<table class="table" style="text-align: center">
+    <tr>
+        <th>
+            付款字號
+        </th>
+        <th>
+            支付金額
+        </th>
+        <th>
+            支付日期
+        </th>
+        <th>
+            兌付日期
+        </th>
+        <th>
+            付款狀態
+        </th>
+      
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.fPaymentStatus == true) { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fCheckNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fCheckMoney)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fPaymentDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fTicktedDay)
+        </td>
+        <td>
+            @{
+                string checkok = "";
+
+                if (item.fPaymentStatus == true)
+                {
+                    checkok = "已付款";
+                }
+                else if (item.fPaymentStatus == false)
+                {
+                    checkok = "尚未付款";
+                }
+
+                @checkok;
+            }
+
+
+            @*@Html.DisplayFor(modelItem => item.fPaymentStatus)*@
+        </td>
+    </tr>
+                    }
+                }
+
+</table>

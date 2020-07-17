@@ -1,0 +1,139 @@
+﻿@model IEnumerable<WebApplication2.tOrderDetail>
+
+@using System.Globalization;
+@{
+    ViewBag.Title = "OrderDetailTable";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+}
+
+<style>
+    body{
+        font-family:'Microsoft JhengHei'
+    }
+</style>
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            @*<h4 class="page-title"></h4>*@
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    @*<ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>*@
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body printableArea">
+                <h3><b>訂單編號: </b>@this.Model.FirstOrDefault().fOrderID </h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <h3> &nbsp;<b class="text-danger">公司名稱: @this.Model.FirstOrDefault().tOrder.tCustomer.fCompanyName</b></h3>
+                        </div>
+                        <br />
+                        <div class="pull-right text-right">
+                            <address>
+                                @using WebApplication2.ViewModel;
+                                <p class="text-muted m-l-30">
+                                    @MSIT126_Company_Info.公司名稱
+                                    <br /> @MSIT126_Company_Info.郵遞區號 @MSIT126_Company_Info.地址
+                                    <br /> 電話：@MSIT126_Company_Info.電話
+                                    <br /> 傳真：@MSIT126_Company_Info.傳真
+                                </p>
+                                <p class="m-t-30"><b>訂單建立日期 :</b> <i class="fa fa-calendar"></i> @Model.FirstOrDefault().tOrder.fOrderDate.ToString("yyyy-MM-dd") </p>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive m-t-40" style="clear: both;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">窗戶型號</th>
+                                        <th class="text-right">玻璃種類</th>
+                                        <th class="text-right">寬度</th>
+                                        <th class="text-right">高度</th>
+                                        <th class="text-right">鋁窗費用</th>
+                                        <th class="text-right">紗窗費用</th>
+                                        <th class="text-right">安裝費用</th>
+                                        <th class="text-right">玻璃費用</th>
+                                        <th class="text-right">水路費用</th>
+                                        <th class="text-right">坎縫費用</th>
+                                        <th class="text-right">單價</th>
+                                        <th class="text-right">數量</th>
+                                        <th class="text-right">小計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td class="text-center">@item.fProductID</td><!--窗戶型號-->
+                                        <td class="text-right">@item.tGlass.fGlassName</td><!--玻璃種類-->
+                                        <td class="text-right">@item.fWidth.ToString("00.0")</td><!--寬度-->
+                                        <td class="text-right">@item.fLenght.ToString("00.0")</td><!--高度-->
+                                        <td class="text-right">@(((decimal)item.fDoorPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--鋁窗費用-->
+                                        <td class="text-right">@(((decimal)item.fScreenPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--紗窗費用-->
+                                        <td class="text-right">@(((decimal)item.fInstallationPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--安裝費用-->
+                                        <td class="text-right">@(((decimal)item.fGlassPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--玻璃費用-->
+                                        <td class="text-right">@(((decimal)item.fWaterWayPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--水路費用-->
+                                        <td class="text-right">@(((decimal)item.fCrackPrice).ToString("#,#", CultureInfo.InvariantCulture))</td><!--坎縫費用-->
+                                        <td class="text-right">@(((decimal)item.fSubTotal).ToString("#,#", CultureInfo.InvariantCulture))</td><!--整窗單價-->
+                                        <td class="text-right">@item.fQuantity</td><!--數量-->
+                                        <td class="text-right">@(((decimal)(item.fSubTotal*item.fQuantity)).ToString("#,#", CultureInfo.InvariantCulture))</td><!--小計-->
+                                    </tr>
+                                    }
+                                    <tr>
+                                        <td class="text-center"><strong>小計</strong></td><!--窗戶型號-->
+                                        <td class="text-center" colspan="3"></td><!--窗戶型號-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p => p.fDoorPrice)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--鋁窗費用-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p => p.fScreenPrice)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--紗窗費用-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p => p.fInstallationPrice)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--安裝費用-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p => p.fGlassID)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--玻璃費用-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p => p.fWaterWayPrice)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--水路費用-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(P => P.fCrackPrice)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--坎縫費用-->
+                                        <td class="text-right"></td><!--整窗單價-->
+                                        <td class="text-right"><strong>總計</strong></td><!--數量-->
+                                        <td class="text-right"><strong>@(((decimal)this.Model.Sum(p=>p.fQuantity*p.fSubTotal)).ToString("#,#", CultureInfo.InvariantCulture))</strong></td><!--小計-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pull-right m-t-30 text-right">
+                            <p>總額(未稅): $  @(((decimal)this.Model.Sum(p=>p.fQuantity*p.fSubTotal)).ToString("#,#", CultureInfo.InvariantCulture))</p>
+                            <p>稅金 (5%) : $  @(((decimal)this.Model.Sum(p=>p.fQuantity*p.fSubTotal)*5/100).ToString("#,#", CultureInfo.InvariantCulture))</p>
+                            <hr>
+                            <h3><b>訂單總價(含稅) :</b> $  @(((decimal)this.Model.Sum(p=>p.fQuantity*p.fSubTotal)*1.05m).ToString("#,#", CultureInfo.InvariantCulture))</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="text-right">
+                            <button class="btn btn-danger" id="print" type="button"> 列印訂單 </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

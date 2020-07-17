@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebApplication2.tOrders>
+
+@{
+    ViewBag.Title = "history";
+}
+
+<h2>history</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderDate)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.fMaterialPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDoorFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fScreenFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fInstallationFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGlassFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fWaterwayFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCrackFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderConfirm)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fOrderDate)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.fMaterialPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fDoorFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fScreenFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fInstallationFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fGlassFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fWaterwayFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fCrackFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fOrderConfirm)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.fOrderID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.fOrderID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.fOrderID })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

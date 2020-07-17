@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@{ 
+    dbMSIT126TeamEntities db= new dbMSIT126TeamEntities();
+    var us = User.Identity.GetUserName();
+    var q = db.tCustomers.Where(n => n.fUserName == us).Select(n=>n.fContactName).FirstOrDefault();
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right"  style="padding-top: 20px;font-size: 20px;font-weight: bold;">
+            <li>
+                @*@Html.ActionLink("你好 " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                @Html.ActionLink("你好 " + q + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">登出</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right" style="padding-top: 20px;font-size: 20px;font-weight: bold;">
+        <li>@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

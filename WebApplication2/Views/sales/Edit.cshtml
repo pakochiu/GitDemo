@@ -1,0 +1,218 @@
+﻿@model WebApplication2.tOrder
+
+@{
+    ViewBag.Title = "編輯";
+    dbMSIT126TeamEntities db = new dbMSIT126TeamEntities();
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+     string empid=Model.tEmployee.fName;
+}
+
+<h2 style="margin:30px">編輯</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<table  style="margin:30px">
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fOrderID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fEmployeeID, "備註人員", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<select name="fEmployeeID">
+                        <option value="">@empid</option>
+                    @foreach (var item in db.tEmployees.Select(s => s))
+                    {
+                        if (item.fName != empid)
+                        {
+                        <option value="@item.fEmployeeID">@item.fName</option>
+                        continue;
+                        }
+                    }
+
+                </select>*@
+                @Html.DropDownList("fEmployeeID", (SelectList)ViewBag.theempList, new { name = "fEmployeeID", id = "fEmployeeID" })
+                @*@Html.EditorFor(model => model.fEmployeeID, new{htmlAttributes=new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fEmployeeID, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("訂單成立日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fOrderDate, new { @class = "form-control datepicker", type = "date", @Value = Model.fOrderDate.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.fOrderDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第一期付款日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fDeliverDate1, new { htmlAttributes = new { @class = "form-control", @Value = Model.fDeliverDate1.ToString("yyyy-MM-dd"), type = "date" } })
+                @Html.ValidationMessageFor(model => model.fDeliverDate1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第一期費用", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fGetMoneyBack1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fGetMoneyBack1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第二期付款日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fDeliverDate2, new { htmlAttributes = new { @class = "form-control", @Value = Model.fDeliverDate2.ToString("yyyy-MM-dd"), type = "date" } })
+                @Html.ValidationMessageFor(model => model.fDeliverDate2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第二期費用", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fGetMoneyBack2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fGetMoneyBack2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第三期付款日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fDeliverDate3, new { htmlAttributes = new { @class = "form-control", @Value = Model.fDeliverDate3.ToString("yyyy-MM-dd"), type = "date" } })
+                @Html.ValidationMessageFor(model => model.fDeliverDate3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第三期費用", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fGetMoneyBack3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fGetMoneyBack3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("第四期付款日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fDeliverDate4, new { htmlAttributes = new { @class = "form-control", @Value = Model.fDeliverDate4.ToString("yyyy-MM-dd"), type = "date" } })
+                @Html.ValidationMessageFor(model => model.fDeliverDate4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("第四期費用", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fGetMoneyBack4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fGetMoneyBack4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("廠商", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.tCustomer.fCompanyName, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("fCustomerID", (SelectList)ViewBag.thecustList, $"@empid", new { name = "fCustomerID", id = "fCustomerID" })
+                @*@Html.ValidationMessageFor(model => model.fCustomerID, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div id="demo">
+
+        </div>
+        <div class="form-group">
+            @Html.Label("鋁價", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fMaterialPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fMaterialPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  hidden="hidden">
+            @Html.Label("門窗樣式", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fDoorFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fDoorFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  hidden="hidden">
+            @Html.Label("鋁料", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fScreenFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fScreenFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  hidden="hidden">
+            @Html.Label("玻璃料", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fGlassFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fGlassFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  hidden="hidden">
+            @Html.Label("付款方式", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fWaterwayFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fWaterwayFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  hidden="hidden">
+            @Html.Label("123", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fCrackFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fCrackFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            @Html.Label("訂單狀況", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <select name="ODConfirm">
+                        <option value="0" id="0">待付款</option>
+                        <option value="1" id="1">已完成</option>
+                    </select>
+
+                    @*@Html.EditorFor(model => model.fOrderConfirm)
+                    @Html.ValidationMessageFor(model => model.fOrderConfirm, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</table>
+}
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+@*<script>
+
+    $.ajax({
+        url: "customerlist",
+        type: "POST",
+        success: function (data) {
+            $("#demo").append(data)
+        }
+    })
+
+</script>*@
+@*<div>
+    @Html.ActionLink("Back to List", "sales")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

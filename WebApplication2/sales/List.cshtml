@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WebApplication2.tOrders>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("新增", "New")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fEmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fMaterialPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDoorFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fScreenFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGlassFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fWaterwayFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCrackFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderConfirm)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fEmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fMaterialPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDoorFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fScreenFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGlassFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fWaterwayFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCrackFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderConfirm)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.fOrderID }, new { Class = "btn btn-primary" })
+                @Html.ActionLink("訂單詳細資料", "orderDetail", new { id = item.fOrderID }, new { Class = "btn btn-success" })
+                @Html.ActionLink("備註", "Comment", new { id = item.fOrderID }, new { Class = "btn btn-dark" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.fOrderID }, new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("歷史訂單", "history", new { Class = "btn btn-primary" })

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication2.tOrder>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("新增", "New")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            訂單編號
+        </th>
+        <th>
+            付款狀況
+        </th>
+        <th>
+            訂單成立日期
+        </th>
+        <th>
+            廠商
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fMaterialPrice)
+        </th>
+      
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderID)
+            </td>
+            <td>
+                @Html.ActionLink(item.tCustomer.fCompanyName, "check", new { id = item.fCustomerID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderDate)
+            </td>
+            <td>
+                @Html.ActionLink(item.tCustomer.fCompanyName, "customer", new { id = item.fCustomerID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fMaterialPrice);
+
+            </td>
+          
+
+
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { id = item.fOrderID }, new { Class = "btn btn-primary" })
+                @Html.ActionLink("訂單詳細資料", "orderDetail", new { id = item.fOrderID }, new { Class = "btn btn-success" })
+                @Html.ActionLink("備註", "Comment", new { id = item.fOrderID }, new { Class = "btn btn-dark" })
+                @Html.ActionLink("刪除", "Delete", new { id = item.fOrderID }, new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("歷史訂單", "history", new { Class = "btn btn-primary" })

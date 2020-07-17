@@ -1,0 +1,84 @@
+﻿@model WebApplication2.tOrderComment
+
+@{
+    ViewBag.Title = "NewComment";
+    dbMSIT126TeamEntities db = new dbMSIT126TeamEntities();
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+
+   
+}
+
+<h2>新增備註</h2>
+
+<form enctype="multipart/form-data" method="post">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>@ViewBag.newcomment 號訂單</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.fOrderID, "fOrderID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("fOrderID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.fOrderID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+           
+            <div class="form-group">
+                @Html.LabelFor(model => model.fEmployeeID, "備註人員", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @ViewBag.empname
+                    @*<select name="fEmployeeID" >
+            @foreach (var item in db.tEmployees.Select(s => s))
+            {
+                        <option value="@item.fEmployeeID">@ViewBag.empname</option>
+            }
+        </select>*@
+                    @*@Html.EditorFor(model => model.fEmployeeID, new{htmlAttributes=new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fEmployeeID, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.fCustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fCustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fCustomerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.Label("內容", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fComment, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fComment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("備註時間", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fUpdateDate, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), placeholder = DateTime.Now, type = "date" } })
+                    @Html.ValidationMessageFor(model => model.fUpdateDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</form>
+<div>
+    @Html.ActionLink("回到備註", "Comment")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

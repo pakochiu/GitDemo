@@ -1,0 +1,1720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbMSIT126TeamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tAluminumMaterialList">
+          <Key>
+            <PropertyRef Name="fMaterialID" />
+          </Key>
+          <Property Name="fMaterialID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AL_UnitWeight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCase">
+          <Key>
+            <PropertyRef Name="fCaseID" />
+          </Key>
+          <Property Name="fCaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fheading" Type="nvarchar" MaxLength="30" />
+          <Property Name="fcontent" Type="nvarchar(max)" />
+          <Property Name="fCustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="tCheck">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerID" Type="int" Nullable="false" />
+          <Property Name="fCheckNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fCheckMoney" Type="money" Nullable="false" />
+          <Property Name="fPaymentDay" Type="date" Nullable="false" />
+          <Property Name="fTicktedDay" Type="date" Nullable="false" />
+          <Property Name="fPaymentStatus" Type="bit" Nullable="false" />
+          <Property Name="fDeleteStatus" Type="bit" Nullable="false" />
+          <Property Name="fPayByCash" Type="bit" Nullable="false" />
+          <Property Name="fOderID" Type="int" Nullable="false" />
+          <Property Name="fPaymentPeriod" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCustomers">
+          <Key>
+            <PropertyRef Name="fCustomerID" />
+          </Key>
+          <Property Name="fCustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fUserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="fCompanyName" Type="nvarchar" MaxLength="10" />
+          <Property Name="fTaxID" Type="nvarchar" MaxLength="10" />
+          <Property Name="fContactName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fTelephone" Type="nvarchar" MaxLength="20" />
+          <Property Name="fPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="fFox" Type="nvarchar" MaxLength="20" />
+          <Property Name="fCity" Type="nvarchar" MaxLength="5" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="fLoginPassword" Type="binary" MaxLength="32" />
+          <Property Name="fUpdateDate" Type="date" />
+          <Property Name="fAuthority" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tDate">
+          <Key>
+            <PropertyRef Name="fDateID" />
+          </Key>
+          <Property Name="fDateID" Type="int" Nullable="false" />
+          <Property Name="fDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tDepartment">
+          <Key>
+            <PropertyRef Name="fDepartmentID" />
+          </Key>
+          <Property Name="fDepartmentID" Type="int" Nullable="false" />
+          <Property Name="fDepartmentName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeID" />
+          </Key>
+          <Property Name="fEmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="nvarchar" MaxLength="10" />
+          <Property Name="fLoginPassword" Type="nvarchar(max)" />
+          <Property Name="fJobTitleID" Type="int" />
+          <Property Name="fDepartmentID" Type="int" />
+          <Property Name="fBirthday" Type="date" />
+          <Property Name="fGender" Type="char" MaxLength="1" />
+          <Property Name="fHireDate" Type="date" />
+          <Property Name="fPhone" Type="nchar" MaxLength="20" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="fEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="fUpdateDate" Type="date" />
+          <Property Name="fUserName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="tFaceDetection">
+          <Key>
+            <PropertyRef Name="fFaceDetectID" />
+          </Key>
+          <Property Name="fFaceDetectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fUserFaceID" Type="nvarchar" MaxLength="255" />
+          <Property Name="fEmployeeID" Type="int" />
+        </EntityType>
+        <EntityType Name="tGlass">
+          <Key>
+            <PropertyRef Name="fGlassID" />
+          </Key>
+          <Property Name="fGlassID" Type="int" Nullable="false" />
+          <Property Name="fGlassName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fGlassPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="tJobTitle">
+          <Key>
+            <PropertyRef Name="fJobTitleID" />
+          </Key>
+          <Property Name="fJobTitleID" Type="int" Nullable="false" />
+          <Property Name="fTitleName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tNews">
+          <Key>
+            <PropertyRef Name="fNewsID" />
+          </Key>
+          <Property Name="fNewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fSubject" Type="nvarchar" MaxLength="80" />
+          <Property Name="fContent" Type="nvarchar(max)" />
+          <Property Name="fData" Type="date" />
+          <Property Name="fCustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="tOrderComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderID" Type="int" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fCustomerID" Type="int" />
+          <Property Name="fComment" Type="nvarchar(max)" />
+          <Property Name="fUpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderID" Type="int" Nullable="false" />
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="fLenght" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="fWidth" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="fGlassID" Type="int" Nullable="false" />
+          <Property Name="fDoorPrice" Type="money" />
+          <Property Name="fScreenPrice" Type="money" />
+          <Property Name="fInstallationPrice" Type="money" />
+          <Property Name="fGlassPrice" Type="money" />
+          <Property Name="fWaterWayPrice" Type="money" />
+          <Property Name="fCrackPrice" Type="money" />
+          <Property Name="fSubTotal" Type="money" />
+          <Property Name="fQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOrders">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerID" Type="int" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fOrderDate" Type="date" Nullable="false" />
+          <Property Name="fDeliverDate1" Type="date" Nullable="false" />
+          <Property Name="fGetMoneyBack1" Type="money" />
+          <Property Name="fDeliverDate2" Type="date" Nullable="false" />
+          <Property Name="fGetMoneyBack2" Type="money" />
+          <Property Name="fDeliverDate3" Type="date" Nullable="false" />
+          <Property Name="fGetMoneyBack3" Type="money" />
+          <Property Name="fDeliverDate4" Type="date" Nullable="false" />
+          <Property Name="fGetMoneyBack4" Type="money" />
+          <Property Name="fMaterialPrice" Type="money" />
+          <Property Name="fDoorFee" Type="float" />
+          <Property Name="fScreenFee" Type="float" />
+          <Property Name="fInstallationFee" Type="float" />
+          <Property Name="fGlassFee" Type="float" />
+          <Property Name="fWaterwayFee" Type="float" />
+          <Property Name="fCrackFee" Type="float" />
+          <Property Name="fOrderConfirm" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="fGroup" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tProductList">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="fMaterialID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="fQuantity" Type="float" Nullable="false" />
+          <Property Name="fType" Type="nvarchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWorkingTime">
+          <Key>
+            <PropertyRef Name="fWorkingID" />
+          </Key>
+          <Property Name="fWorkingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fDateID" Type="int" Nullable="false" />
+          <Property Name="fFaceDetectID" Type="int" />
+          <Property Name="fStartWorkingTime" Type="datetime" />
+          <Property Name="fOffWorkingTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GlassID">
+          <End Role="tGlass" Type="Self.tGlass" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGlass">
+              <PropertyRef Name="fGlassID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fGlassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersID">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductID">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCase_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tCase" Type="Self.tCase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCase">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tCheck" Type="Self.tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tOrders">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="1" />
+          <End Role="tCheck" Type="Self.tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fOderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tCustomers_AspNetUsers' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tCustomers_AspNetUsers" />-->
+        <Association Name="FK_tCustomers_tEmployee1">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tCustomers">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDate_tDate">
+          <End Role="tDate" Type="Self.tDate" Multiplicity="1" />
+          <End Role="tDate1" Type="Self.tDate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tDate">
+              <PropertyRef Name="fDateID" />
+            </Principal>
+            <Dependent Role="tDate1">
+              <PropertyRef Name="fDateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartment">
+          <End Role="tDepartment" Type="Self.tDepartment" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartment">
+              <PropertyRef Name="fDepartmentID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tJobTitle">
+          <End Role="tJobTitle" Type="Self.tJobTitle" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tJobTitle">
+              <PropertyRef Name="fJobTitleID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tFaceDetection_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tFaceDetection" Type="Self.tFaceDetection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tFaceDetection">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tNews" Type="Self.tNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tNews">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tOrders">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tAluminumMaterialList">
+          <End Role="tAluminumMaterialList" Type="Self.tAluminumMaterialList" Multiplicity="1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAluminumMaterialList">
+              <PropertyRef Name="fMaterialID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fMaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWorkingTime_tDate">
+          <End Role="tDate" Type="Self.tDate" Multiplicity="1" />
+          <End Role="tWorkingTime" Type="Self.tWorkingTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDate">
+              <PropertyRef Name="fDateID" />
+            </Principal>
+            <Dependent Role="tWorkingTime">
+              <PropertyRef Name="fDateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWorkingTime_tFaceDetection">
+          <End Role="tFaceDetection" Type="Self.tFaceDetection" Multiplicity="0..1" />
+          <End Role="tWorkingTime" Type="Self.tWorkingTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFaceDetection">
+              <PropertyRef Name="fFaceDetectID" />
+            </Principal>
+            <Dependent Role="tWorkingTime">
+              <PropertyRef Name="fFaceDetectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbMSIT126TeamModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAluminumMaterialList" EntityType="Self.tAluminumMaterialList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCase" EntityType="Self.tCase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCheck" EntityType="Self.tCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomers" EntityType="Self.tCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDate" EntityType="Self.tDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDepartment" EntityType="Self.tDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFaceDetection" EntityType="Self.tFaceDetection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tGlass" EntityType="Self.tGlass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tJobTitle" EntityType="Self.tJobTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNews" EntityType="Self.tNews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderComment" EntityType="Self.tOrderComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrders" EntityType="Self.tOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductList" EntityType="Self.tProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWorkingTime" EntityType="Self.tWorkingTime" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GlassID" Association="Self.FK_GlassID">
+            <End Role="tGlass" EntitySet="tGlass" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersID" Association="Self.FK_OrdersID">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductID" Association="Self.FK_ProductID">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCase_tCustomers" Association="Self.FK_tCase_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tCase" EntitySet="tCase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tCustomers" Association="Self.FK_tCheck_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tCheck" EntitySet="tCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tOrders" Association="Self.FK_tCheck_tOrders">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tCheck" EntitySet="tCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomers_tEmployee1" Association="Self.FK_tCustomers_tEmployee1">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCustomers" EntitySet="tCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDate_tDate" Association="Self.FK_tDate_tDate">
+            <End Role="tDate" EntitySet="tDate" />
+            <End Role="tDate1" EntitySet="tDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartment" Association="Self.FK_tEmployee_tDepartment">
+            <End Role="tDepartment" EntitySet="tDepartment" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tJobTitle" Association="Self.FK_tEmployee_tJobTitle">
+            <End Role="tJobTitle" EntitySet="tJobTitle" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tFaceDetection_tEmployee" Association="Self.FK_tFaceDetection_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tFaceDetection" EntitySet="tFaceDetection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tCustomers" Association="Self.FK_tNews_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tNews" EntitySet="tNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tEmployee" Association="Self.FK_tOrderComment_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tOrders" Association="Self.FK_tOrderComment_tOrders">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tCustomers" Association="Self.FK_tOrders_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tEmployee" Association="Self.FK_tOrders_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tAluminumMaterialList" Association="Self.FK_tProductList_tAluminumMaterialList">
+            <End Role="tAluminumMaterialList" EntitySet="tAluminumMaterialList" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tProduct" Association="Self.FK_tProductList_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWorkingTime_tDate" Association="Self.FK_tWorkingTime_tDate">
+            <End Role="tDate" EntitySet="tDate" />
+            <End Role="tWorkingTime" EntitySet="tWorkingTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWorkingTime_tFaceDetection" Association="Self.FK_tWorkingTime_tFaceDetection">
+            <End Role="tFaceDetection" EntitySet="tFaceDetection" />
+            <End Role="tWorkingTime" EntitySet="tWorkingTime" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbMSIT126TeamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbMSIT126TeamEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="dbMSIT126TeamModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="dbMSIT126TeamModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="dbMSIT126TeamModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="dbMSIT126TeamModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="dbMSIT126TeamModel.AspNetUser" />
+          <EntitySet Name="sysdiagrams" EntityType="dbMSIT126TeamModel.sysdiagram" />
+          <EntitySet Name="tAluminumMaterialLists" EntityType="dbMSIT126TeamModel.tAluminumMaterialList" />
+          <EntitySet Name="tCases" EntityType="dbMSIT126TeamModel.tCase" />
+          <EntitySet Name="tChecks" EntityType="dbMSIT126TeamModel.tCheck" />
+          <EntitySet Name="tCustomers" EntityType="dbMSIT126TeamModel.tCustomer" />
+          <EntitySet Name="tDates" EntityType="dbMSIT126TeamModel.tDate" />
+          <EntitySet Name="tDepartments" EntityType="dbMSIT126TeamModel.tDepartment" />
+          <EntitySet Name="tEmployees" EntityType="dbMSIT126TeamModel.tEmployee" />
+          <EntitySet Name="tFaceDetections" EntityType="dbMSIT126TeamModel.tFaceDetection" />
+          <EntitySet Name="tGlasses" EntityType="dbMSIT126TeamModel.tGlass" />
+          <EntitySet Name="tJobTitles" EntityType="dbMSIT126TeamModel.tJobTitle" />
+          <EntitySet Name="tNews" EntityType="dbMSIT126TeamModel.tNew" />
+          <EntitySet Name="tOrderComments" EntityType="dbMSIT126TeamModel.tOrderComment" />
+          <EntitySet Name="tOrderDetails" EntityType="dbMSIT126TeamModel.tOrderDetail" />
+          <EntitySet Name="tOrders" EntityType="dbMSIT126TeamModel.tOrder" />
+          <EntitySet Name="tProducts" EntityType="dbMSIT126TeamModel.tProduct" />
+          <EntitySet Name="tProductLists" EntityType="dbMSIT126TeamModel.tProductList" />
+          <EntitySet Name="tWorkingTimes" EntityType="dbMSIT126TeamModel.tWorkingTime" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="dbMSIT126TeamModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="dbMSIT126TeamModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tAluminumMaterialList" Association="dbMSIT126TeamModel.FK_tProductList_tAluminumMaterialList">
+            <End Role="tAluminumMaterialList" EntitySet="tAluminumMaterialLists" />
+            <End Role="tProductList" EntitySet="tProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCase_tCustomers" Association="dbMSIT126TeamModel.FK_tCase_tCustomers">
+            <End Role="tCustomer" EntitySet="tCustomers" />
+            <End Role="tCase" EntitySet="tCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tCustomers" Association="dbMSIT126TeamModel.FK_tCheck_tCustomers">
+            <End Role="tCustomer" EntitySet="tCustomers" />
+            <End Role="tCheck" EntitySet="tChecks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tOrders" Association="dbMSIT126TeamModel.FK_tCheck_tOrders">
+            <End Role="tOrder" EntitySet="tOrders" />
+            <End Role="tCheck" EntitySet="tChecks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomers_tEmployee1" Association="dbMSIT126TeamModel.FK_tCustomers_tEmployee1">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tCustomer" EntitySet="tCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tNews_tCustomers" Association="dbMSIT126TeamModel.FK_tNews_tCustomers">
+            <End Role="tCustomer" EntitySet="tCustomers" />
+            <End Role="tNew" EntitySet="tNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tCustomers" Association="dbMSIT126TeamModel.FK_tOrders_tCustomers">
+            <End Role="tCustomer" EntitySet="tCustomers" />
+            <End Role="tOrder" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDate_tDate" Association="dbMSIT126TeamModel.FK_tDate_tDate">
+            <End Role="tDate" EntitySet="tDates" />
+            <End Role="tDate1" EntitySet="tDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWorkingTime_tDate" Association="dbMSIT126TeamModel.FK_tWorkingTime_tDate">
+            <End Role="tDate" EntitySet="tDates" />
+            <End Role="tWorkingTime" EntitySet="tWorkingTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartment" Association="dbMSIT126TeamModel.FK_tEmployee_tDepartment">
+            <End Role="tDepartment" EntitySet="tDepartments" />
+            <End Role="tEmployee" EntitySet="tEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tJobTitle" Association="dbMSIT126TeamModel.FK_tEmployee_tJobTitle">
+            <End Role="tJobTitle" EntitySet="tJobTitles" />
+            <End Role="tEmployee" EntitySet="tEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tFaceDetection_tEmployee" Association="dbMSIT126TeamModel.FK_tFaceDetection_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tFaceDetection" EntitySet="tFaceDetections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tEmployee" Association="dbMSIT126TeamModel.FK_tOrderComment_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tOrderComment" EntitySet="tOrderComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tEmployee" Association="dbMSIT126TeamModel.FK_tOrders_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tOrder" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWorkingTime_tFaceDetection" Association="dbMSIT126TeamModel.FK_tWorkingTime_tFaceDetection">
+            <End Role="tFaceDetection" EntitySet="tFaceDetections" />
+            <End Role="tWorkingTime" EntitySet="tWorkingTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GlassID" Association="dbMSIT126TeamModel.FK_GlassID">
+            <End Role="tGlass" EntitySet="tGlasses" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tOrders" Association="dbMSIT126TeamModel.FK_tOrderComment_tOrders">
+            <End Role="tOrder" EntitySet="tOrders" />
+            <End Role="tOrderComment" EntitySet="tOrderComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersID" Association="dbMSIT126TeamModel.FK_OrdersID">
+            <End Role="tOrder" EntitySet="tOrders" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductID" Association="dbMSIT126TeamModel.FK_ProductID">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tProduct" Association="dbMSIT126TeamModel.FK_tProductList_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tProductList" EntitySet="tProductLists" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="dbMSIT126TeamModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="dbMSIT126TeamModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="dbMSIT126TeamModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="dbMSIT126TeamModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="dbMSIT126TeamModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="dbMSIT126TeamModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="dbMSIT126TeamModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tAluminumMaterialList">
+          <Key>
+            <PropertyRef Name="fMaterialID" />
+          </Key>
+          <Property Name="fMaterialID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AL_UnitWeight" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="tProductLists" Relationship="dbMSIT126TeamModel.FK_tProductList_tAluminumMaterialList" FromRole="tAluminumMaterialList" ToRole="tProductList" />
+        </EntityType>
+        <EntityType Name="tCase">
+          <Key>
+            <PropertyRef Name="fCaseID" />
+          </Key>
+          <Property Name="fCaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fheading" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="fcontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <NavigationProperty Name="tCustomer" Relationship="dbMSIT126TeamModel.FK_tCase_tCustomers" FromRole="tCase" ToRole="tCustomer" />
+        </EntityType>
+        <EntityType Name="tCheck">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerID" Type="Int32" Nullable="false" />
+          <Property Name="fCheckNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCheckMoney" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="fPaymentDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fTicktedDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fPaymentStatus" Type="Boolean" Nullable="false" />
+          <Property Name="fDeleteStatus" Type="Boolean" Nullable="false" />
+          <Property Name="fPayByCash" Type="Boolean" Nullable="false" />
+          <Property Name="fOderID" Type="Int32" Nullable="false" />
+          <Property Name="fPaymentPeriod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCustomer" Relationship="dbMSIT126TeamModel.FK_tCheck_tCustomers" FromRole="tCheck" ToRole="tCustomer" />
+          <NavigationProperty Name="tOrder" Relationship="dbMSIT126TeamModel.FK_tCheck_tOrders" FromRole="tCheck" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tCustomer">
+          <Key>
+            <PropertyRef Name="fCustomerID" />
+          </Key>
+          <Property Name="fCustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="fCompanyName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fTaxID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fContactName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fTelephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fFox" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fCity" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fLoginPassword" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="fAuthority" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCases" Relationship="dbMSIT126TeamModel.FK_tCase_tCustomers" FromRole="tCustomer" ToRole="tCase" />
+          <NavigationProperty Name="tChecks" Relationship="dbMSIT126TeamModel.FK_tCheck_tCustomers" FromRole="tCustomer" ToRole="tCheck" />
+          <NavigationProperty Name="tEmployee" Relationship="dbMSIT126TeamModel.FK_tCustomers_tEmployee1" FromRole="tCustomer" ToRole="tEmployee" />
+          <NavigationProperty Name="tNews" Relationship="dbMSIT126TeamModel.FK_tNews_tCustomers" FromRole="tCustomer" ToRole="tNew" />
+          <NavigationProperty Name="tOrders" Relationship="dbMSIT126TeamModel.FK_tOrders_tCustomers" FromRole="tCustomer" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tDate">
+          <Key>
+            <PropertyRef Name="fDateID" />
+          </Key>
+          <Property Name="fDateID" Type="Int32" Nullable="false" />
+          <Property Name="fDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tDate1" Relationship="dbMSIT126TeamModel.FK_tDate_tDate" FromRole="tDate" ToRole="tDate1" />
+          <NavigationProperty Name="tDate2" Relationship="dbMSIT126TeamModel.FK_tDate_tDate" FromRole="tDate1" ToRole="tDate" />
+          <NavigationProperty Name="tWorkingTimes" Relationship="dbMSIT126TeamModel.FK_tWorkingTime_tDate" FromRole="tDate" ToRole="tWorkingTime" />
+        </EntityType>
+        <EntityType Name="tDepartment">
+          <Key>
+            <PropertyRef Name="fDepartmentID" />
+          </Key>
+          <Property Name="fDepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="fDepartmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployees" Relationship="dbMSIT126TeamModel.FK_tEmployee_tDepartment" FromRole="tDepartment" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeID" />
+          </Key>
+          <Property Name="fEmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fLoginPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fJobTitleID" Type="Int32" />
+          <Property Name="fDepartmentID" Type="Int32" />
+          <Property Name="fBirthday" Type="DateTime" Precision="0" />
+          <Property Name="fGender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="fHireDate" Type="DateTime" Precision="0" />
+          <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="fUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tCustomers" Relationship="dbMSIT126TeamModel.FK_tCustomers_tEmployee1" FromRole="tEmployee" ToRole="tCustomer" />
+          <NavigationProperty Name="tDepartment" Relationship="dbMSIT126TeamModel.FK_tEmployee_tDepartment" FromRole="tEmployee" ToRole="tDepartment" />
+          <NavigationProperty Name="tJobTitle" Relationship="dbMSIT126TeamModel.FK_tEmployee_tJobTitle" FromRole="tEmployee" ToRole="tJobTitle" />
+          <NavigationProperty Name="tFaceDetections" Relationship="dbMSIT126TeamModel.FK_tFaceDetection_tEmployee" FromRole="tEmployee" ToRole="tFaceDetection" />
+          <NavigationProperty Name="tOrderComments" Relationship="dbMSIT126TeamModel.FK_tOrderComment_tEmployee" FromRole="tEmployee" ToRole="tOrderComment" />
+          <NavigationProperty Name="tOrders" Relationship="dbMSIT126TeamModel.FK_tOrders_tEmployee" FromRole="tEmployee" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tFaceDetection">
+          <Key>
+            <PropertyRef Name="fFaceDetectID" />
+          </Key>
+          <Property Name="fFaceDetectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fUserFaceID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <NavigationProperty Name="tEmployee" Relationship="dbMSIT126TeamModel.FK_tFaceDetection_tEmployee" FromRole="tFaceDetection" ToRole="tEmployee" />
+          <NavigationProperty Name="tWorkingTimes" Relationship="dbMSIT126TeamModel.FK_tWorkingTime_tFaceDetection" FromRole="tFaceDetection" ToRole="tWorkingTime" />
+        </EntityType>
+        <EntityType Name="tGlass">
+          <Key>
+            <PropertyRef Name="fGlassID" />
+          </Key>
+          <Property Name="fGlassID" Type="Int32" Nullable="false" />
+          <Property Name="fGlassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fGlassPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tOrderDetails" Relationship="dbMSIT126TeamModel.FK_GlassID" FromRole="tGlass" ToRole="tOrderDetail" />
+        </EntityType>
+        <EntityType Name="tJobTitle">
+          <Key>
+            <PropertyRef Name="fJobTitleID" />
+          </Key>
+          <Property Name="fJobTitleID" Type="Int32" Nullable="false" />
+          <Property Name="fTitleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployees" Relationship="dbMSIT126TeamModel.FK_tEmployee_tJobTitle" FromRole="tJobTitle" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tNew">
+          <Key>
+            <PropertyRef Name="fNewsID" />
+          </Key>
+          <Property Name="fNewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fSubject" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="fContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fData" Type="DateTime" Precision="0" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <NavigationProperty Name="tCustomer" Relationship="dbMSIT126TeamModel.FK_tNews_tCustomers" FromRole="tNew" ToRole="tCustomer" />
+        </EntityType>
+        <EntityType Name="tOrderComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderID" Type="Int32" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <Property Name="fComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tEmployee" Relationship="dbMSIT126TeamModel.FK_tOrderComment_tEmployee" FromRole="tOrderComment" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrder" Relationship="dbMSIT126TeamModel.FK_tOrderComment_tOrders" FromRole="tOrderComment" ToRole="tOrder" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderID" Type="Int32" Nullable="false" />
+          <Property Name="fProductID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fLenght" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="fWidth" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="fGlassID" Type="Int32" Nullable="false" />
+          <Property Name="fDoorPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fScreenPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fInstallationPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fGlassPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fWaterWayPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fCrackPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fSubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tGlass" Relationship="dbMSIT126TeamModel.FK_GlassID" FromRole="tOrderDetail" ToRole="tGlass" />
+          <NavigationProperty Name="tOrder" Relationship="dbMSIT126TeamModel.FK_OrdersID" FromRole="tOrderDetail" ToRole="tOrder" />
+          <NavigationProperty Name="tProduct" Relationship="dbMSIT126TeamModel.FK_ProductID" FromRole="tOrderDetail" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fOrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fDeliverDate1" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fGetMoneyBack1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate2" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fGetMoneyBack2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate3" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fGetMoneyBack3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate4" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fGetMoneyBack4" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fMaterialPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDoorFee" Type="Double" />
+          <Property Name="fScreenFee" Type="Double" />
+          <Property Name="fInstallationFee" Type="Double" />
+          <Property Name="fGlassFee" Type="Double" />
+          <Property Name="fWaterwayFee" Type="Double" />
+          <Property Name="fCrackFee" Type="Double" />
+          <Property Name="fOrderConfirm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tChecks" Relationship="dbMSIT126TeamModel.FK_tCheck_tOrders" FromRole="tOrder" ToRole="tCheck" />
+          <NavigationProperty Name="tCustomer" Relationship="dbMSIT126TeamModel.FK_tOrders_tCustomers" FromRole="tOrder" ToRole="tCustomer" />
+          <NavigationProperty Name="tEmployee" Relationship="dbMSIT126TeamModel.FK_tOrders_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrderComments" Relationship="dbMSIT126TeamModel.FK_tOrderComment_tOrders" FromRole="tOrder" ToRole="tOrderComment" />
+          <NavigationProperty Name="tOrderDetails" Relationship="dbMSIT126TeamModel.FK_OrdersID" FromRole="tOrder" ToRole="tOrderDetail" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fGroup" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tOrderDetails" Relationship="dbMSIT126TeamModel.FK_ProductID" FromRole="tProduct" ToRole="tOrderDetail" />
+          <NavigationProperty Name="tProductLists" Relationship="dbMSIT126TeamModel.FK_tProductList_tProduct" FromRole="tProduct" ToRole="tProductList" />
+        </EntityType>
+        <EntityType Name="tProductList">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fProductID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fMaterialID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fQuantity" Type="Double" Nullable="false" />
+          <Property Name="fType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tAluminumMaterialList" Relationship="dbMSIT126TeamModel.FK_tProductList_tAluminumMaterialList" FromRole="tProductList" ToRole="tAluminumMaterialList" />
+          <NavigationProperty Name="tProduct" Relationship="dbMSIT126TeamModel.FK_tProductList_tProduct" FromRole="tProductList" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tWorkingTime">
+          <Key>
+            <PropertyRef Name="fWorkingID" />
+          </Key>
+          <Property Name="fWorkingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fDateID" Type="Int32" Nullable="false" />
+          <Property Name="fFaceDetectID" Type="Int32" />
+          <Property Name="fStartWorkingTime" Type="DateTime" Precision="3" />
+          <Property Name="fOffWorkingTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tDate" Relationship="dbMSIT126TeamModel.FK_tWorkingTime_tDate" FromRole="tWorkingTime" ToRole="tDate" />
+          <NavigationProperty Name="tFaceDetection" Relationship="dbMSIT126TeamModel.FK_tWorkingTime_tFaceDetection" FromRole="tWorkingTime" ToRole="tFaceDetection" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="dbMSIT126TeamModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbMSIT126TeamModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="dbMSIT126TeamModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbMSIT126TeamModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tAluminumMaterialList">
+          <End Type="dbMSIT126TeamModel.tAluminumMaterialList" Role="tAluminumMaterialList" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tProductList" Role="tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAluminumMaterialList">
+              <PropertyRef Name="fMaterialID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fMaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCase_tCustomers">
+          <End Type="dbMSIT126TeamModel.tCustomer" Role="tCustomer" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tCase" Role="tCase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCase">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tCustomers">
+          <End Type="dbMSIT126TeamModel.tCustomer" Role="tCustomer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbMSIT126TeamModel.tCheck" Role="tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tOrders">
+          <End Type="dbMSIT126TeamModel.tOrder" Role="tOrder" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tCheck" Role="tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fOderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomers_tEmployee1">
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tCustomer" Role="tCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tCustomer">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tNews_tCustomers">
+          <End Type="dbMSIT126TeamModel.tCustomer" Role="tCustomer" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tNew" Role="tNew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tNew">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tCustomers">
+          <End Type="dbMSIT126TeamModel.tCustomer" Role="tCustomer" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tOrder" Role="tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomer">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDate_tDate">
+          <End Type="dbMSIT126TeamModel.tDate" Role="tDate" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tDate" Role="tDate1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tDate">
+              <PropertyRef Name="fDateID" />
+            </Principal>
+            <Dependent Role="tDate1">
+              <PropertyRef Name="fDateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWorkingTime_tDate">
+          <End Type="dbMSIT126TeamModel.tDate" Role="tDate" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tWorkingTime" Role="tWorkingTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDate">
+              <PropertyRef Name="fDateID" />
+            </Principal>
+            <Dependent Role="tWorkingTime">
+              <PropertyRef Name="fDateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartment">
+          <End Type="dbMSIT126TeamModel.tDepartment" Role="tDepartment" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartment">
+              <PropertyRef Name="fDepartmentID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tJobTitle">
+          <End Type="dbMSIT126TeamModel.tJobTitle" Role="tJobTitle" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tJobTitle">
+              <PropertyRef Name="fJobTitleID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tFaceDetection_tEmployee">
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tFaceDetection" Role="tFaceDetection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tFaceDetection">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tEmployee">
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tOrderComment" Role="tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tEmployee">
+          <End Type="dbMSIT126TeamModel.tEmployee" Role="tEmployee" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tOrder" Role="tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWorkingTime_tFaceDetection">
+          <End Type="dbMSIT126TeamModel.tFaceDetection" Role="tFaceDetection" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tWorkingTime" Role="tWorkingTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFaceDetection">
+              <PropertyRef Name="fFaceDetectID" />
+            </Principal>
+            <Dependent Role="tWorkingTime">
+              <PropertyRef Name="fFaceDetectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GlassID">
+          <End Type="dbMSIT126TeamModel.tGlass" Role="tGlass" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGlass">
+              <PropertyRef Name="fGlassID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fGlassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tOrders">
+          <End Type="dbMSIT126TeamModel.tOrder" Role="tOrder" Multiplicity="0..1" />
+          <End Type="dbMSIT126TeamModel.tOrderComment" Role="tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersID">
+          <End Type="dbMSIT126TeamModel.tOrder" Role="tOrder" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductID">
+          <End Type="dbMSIT126TeamModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tProduct">
+          <End Type="dbMSIT126TeamModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="dbMSIT126TeamModel.tProductList" Role="tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="dbMSIT126TeamModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="dbMSIT126TeamModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbMSIT126TeamModelStoreContainer" CdmEntityContainer="dbMSIT126TeamEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAluminumMaterialLists">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tAluminumMaterialList">
+              <MappingFragment StoreEntitySet="tAluminumMaterialList">
+                <ScalarProperty Name="AL_UnitWeight" ColumnName="AL_UnitWeight" />
+                <ScalarProperty Name="fMaterialID" ColumnName="fMaterialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCases">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tCase">
+              <MappingFragment StoreEntitySet="tCase">
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fcontent" ColumnName="fcontent" />
+                <ScalarProperty Name="fheading" ColumnName="fheading" />
+                <ScalarProperty Name="fCaseID" ColumnName="fCaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tChecks">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tCheck">
+              <MappingFragment StoreEntitySet="tCheck">
+                <ScalarProperty Name="fPaymentPeriod" ColumnName="fPaymentPeriod" />
+                <ScalarProperty Name="fOderID" ColumnName="fOderID" />
+                <ScalarProperty Name="fPayByCash" ColumnName="fPayByCash" />
+                <ScalarProperty Name="fDeleteStatus" ColumnName="fDeleteStatus" />
+                <ScalarProperty Name="fPaymentStatus" ColumnName="fPaymentStatus" />
+                <ScalarProperty Name="fTicktedDay" ColumnName="fTicktedDay" />
+                <ScalarProperty Name="fPaymentDay" ColumnName="fPaymentDay" />
+                <ScalarProperty Name="fCheckMoney" ColumnName="fCheckMoney" />
+                <ScalarProperty Name="fCheckNumber" ColumnName="fCheckNumber" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fID" ColumnName="fID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomers">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tCustomer">
+              <MappingFragment StoreEntitySet="tCustomers">
+                <ScalarProperty Name="fAuthority" ColumnName="fAuthority" />
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+                <ScalarProperty Name="fLoginPassword" ColumnName="fLoginPassword" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fCity" ColumnName="fCity" />
+                <ScalarProperty Name="fFox" ColumnName="fFox" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fTelephone" ColumnName="fTelephone" />
+                <ScalarProperty Name="fContactName" ColumnName="fContactName" />
+                <ScalarProperty Name="fTaxID" ColumnName="fTaxID" />
+                <ScalarProperty Name="fCompanyName" ColumnName="fCompanyName" />
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDates">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tDate">
+              <MappingFragment StoreEntitySet="tDate">
+                <ScalarProperty Name="fDate" ColumnName="fDate" />
+                <ScalarProperty Name="fDateID" ColumnName="fDateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDepartments">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tDepartment">
+              <MappingFragment StoreEntitySet="tDepartment">
+                <ScalarProperty Name="fDepartmentName" ColumnName="fDepartmentName" />
+                <ScalarProperty Name="fDepartmentID" ColumnName="fDepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmployees">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tEmployee">
+              <MappingFragment StoreEntitySet="tEmployee">
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+                <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fHireDate" ColumnName="fHireDate" />
+                <ScalarProperty Name="fGender" ColumnName="fGender" />
+                <ScalarProperty Name="fBirthday" ColumnName="fBirthday" />
+                <ScalarProperty Name="fDepartmentID" ColumnName="fDepartmentID" />
+                <ScalarProperty Name="fJobTitleID" ColumnName="fJobTitleID" />
+                <ScalarProperty Name="fLoginPassword" ColumnName="fLoginPassword" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFaceDetections">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tFaceDetection">
+              <MappingFragment StoreEntitySet="tFaceDetection">
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fUserFaceID" ColumnName="fUserFaceID" />
+                <ScalarProperty Name="fFaceDetectID" ColumnName="fFaceDetectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tGlasses">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tGlass">
+              <MappingFragment StoreEntitySet="tGlass">
+                <ScalarProperty Name="fGlassPrice" ColumnName="fGlassPrice" />
+                <ScalarProperty Name="fGlassName" ColumnName="fGlassName" />
+                <ScalarProperty Name="fGlassID" ColumnName="fGlassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tJobTitles">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tJobTitle">
+              <MappingFragment StoreEntitySet="tJobTitle">
+                <ScalarProperty Name="fTitleName" ColumnName="fTitleName" />
+                <ScalarProperty Name="fJobTitleID" ColumnName="fJobTitleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNews">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tNew">
+              <MappingFragment StoreEntitySet="tNews">
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fData" ColumnName="fData" />
+                <ScalarProperty Name="fContent" ColumnName="fContent" />
+                <ScalarProperty Name="fSubject" ColumnName="fSubject" />
+                <ScalarProperty Name="fNewsID" ColumnName="fNewsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderComments">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tOrderComment">
+              <MappingFragment StoreEntitySet="tOrderComment">
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+                <ScalarProperty Name="fComment" ColumnName="fComment" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fID" ColumnName="fID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderDetails">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tOrderDetail">
+              <MappingFragment StoreEntitySet="tOrderDetail">
+                <ScalarProperty Name="fQuantity" ColumnName="fQuantity" />
+                <ScalarProperty Name="fSubTotal" ColumnName="fSubTotal" />
+                <ScalarProperty Name="fCrackPrice" ColumnName="fCrackPrice" />
+                <ScalarProperty Name="fWaterWayPrice" ColumnName="fWaterWayPrice" />
+                <ScalarProperty Name="fGlassPrice" ColumnName="fGlassPrice" />
+                <ScalarProperty Name="fInstallationPrice" ColumnName="fInstallationPrice" />
+                <ScalarProperty Name="fScreenPrice" ColumnName="fScreenPrice" />
+                <ScalarProperty Name="fDoorPrice" ColumnName="fDoorPrice" />
+                <ScalarProperty Name="fGlassID" ColumnName="fGlassID" />
+                <ScalarProperty Name="fWidth" ColumnName="fWidth" />
+                <ScalarProperty Name="fLenght" ColumnName="fLenght" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fID" ColumnName="fID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrders">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tOrder">
+              <MappingFragment StoreEntitySet="tOrders">
+                <ScalarProperty Name="fOrderConfirm" ColumnName="fOrderConfirm" />
+                <ScalarProperty Name="fCrackFee" ColumnName="fCrackFee" />
+                <ScalarProperty Name="fWaterwayFee" ColumnName="fWaterwayFee" />
+                <ScalarProperty Name="fGlassFee" ColumnName="fGlassFee" />
+                <ScalarProperty Name="fInstallationFee" ColumnName="fInstallationFee" />
+                <ScalarProperty Name="fScreenFee" ColumnName="fScreenFee" />
+                <ScalarProperty Name="fDoorFee" ColumnName="fDoorFee" />
+                <ScalarProperty Name="fMaterialPrice" ColumnName="fMaterialPrice" />
+                <ScalarProperty Name="fGetMoneyBack4" ColumnName="fGetMoneyBack4" />
+                <ScalarProperty Name="fDeliverDate4" ColumnName="fDeliverDate4" />
+                <ScalarProperty Name="fGetMoneyBack3" ColumnName="fGetMoneyBack3" />
+                <ScalarProperty Name="fDeliverDate3" ColumnName="fDeliverDate3" />
+                <ScalarProperty Name="fGetMoneyBack2" ColumnName="fGetMoneyBack2" />
+                <ScalarProperty Name="fDeliverDate2" ColumnName="fDeliverDate2" />
+                <ScalarProperty Name="fGetMoneyBack1" ColumnName="fGetMoneyBack1" />
+                <ScalarProperty Name="fDeliverDate1" ColumnName="fDeliverDate1" />
+                <ScalarProperty Name="fOrderDate" ColumnName="fOrderDate" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProducts">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tProduct">
+              <MappingFragment StoreEntitySet="tProduct">
+                <ScalarProperty Name="fGroup" ColumnName="fGroup" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductLists">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tProductList">
+              <MappingFragment StoreEntitySet="tProductList">
+                <ScalarProperty Name="fType" ColumnName="fType" />
+                <ScalarProperty Name="fQuantity" ColumnName="fQuantity" />
+                <ScalarProperty Name="fMaterialID" ColumnName="fMaterialID" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+                <ScalarProperty Name="fID" ColumnName="fID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWorkingTimes">
+            <EntityTypeMapping TypeName="dbMSIT126TeamModel.tWorkingTime">
+              <MappingFragment StoreEntitySet="tWorkingTime">
+                <ScalarProperty Name="fOffWorkingTime" ColumnName="fOffWorkingTime" />
+                <ScalarProperty Name="fStartWorkingTime" ColumnName="fStartWorkingTime" />
+                <ScalarProperty Name="fFaceDetectID" ColumnName="fFaceDetectID" />
+                <ScalarProperty Name="fDateID" ColumnName="fDateID" />
+                <ScalarProperty Name="fWorkingID" ColumnName="fWorkingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="dbMSIT126TeamModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

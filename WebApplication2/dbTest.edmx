@@ -1,0 +1,949 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbMSIT126Team02Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tAluminumMaterialList">
+          <Key>
+            <PropertyRef Name="fMaterialID" />
+          </Key>
+          <Property Name="fMaterialID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AL_UnitWeight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCheck">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCustomerID" Type="int" />
+          <Property Name="fCheckNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="fCheckMoney" Type="money" />
+          <Property Name="fPaymentDay" Type="date" />
+          <Property Name="fTaxID" Type="nvarchar" MaxLength="50" />
+          <Property Name="fTicktedDay" Type="date" />
+        </EntityType>
+        <EntityType Name="tCustomers">
+          <Key>
+            <PropertyRef Name="fCustomerID" />
+          </Key>
+          <Property Name="fCustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fUserName" Type="nchar" MaxLength="10" />
+          <Property Name="fCompanyName" Type="nvarchar" MaxLength="10" />
+          <Property Name="fTaxID" Type="nvarchar" MaxLength="10" />
+          <Property Name="fContactName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fTelephone" Type="nvarchar" MaxLength="20" />
+          <Property Name="fPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="fFox" Type="nvarchar" MaxLength="20" />
+          <Property Name="fCity" Type="nvarchar" MaxLength="5" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="fLoginPassword" Type="binary" MaxLength="32" />
+          <Property Name="fUpdateDate" Type="date" />
+          <Property Name="fName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tDepartment">
+          <Key>
+            <PropertyRef Name="fDepartmentID" />
+          </Key>
+          <Property Name="fDepartmentID" Type="int" Nullable="false" />
+          <Property Name="fDepartmentName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeID" />
+          </Key>
+          <Property Name="fEmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="nchar" MaxLength="10" />
+          <Property Name="fLoginPassword" Type="binary" MaxLength="32" />
+          <Property Name="fJobTitleID" Type="int" />
+          <Property Name="fDepartmentID" Type="int" />
+          <Property Name="fBirthday" Type="date" />
+          <Property Name="fGender" Type="char" MaxLength="1" />
+          <Property Name="fHireDate" Type="date" />
+          <Property Name="fPhone" Type="nchar" MaxLength="20" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="fUpdateDate" Type="date" />
+          <Property Name="fUserName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tGlass">
+          <Key>
+            <PropertyRef Name="fGlassID" />
+          </Key>
+          <Property Name="fGlassID" Type="int" Nullable="false" />
+          <Property Name="fGlassName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fGlassPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="tJobTitle">
+          <Key>
+            <PropertyRef Name="fJobTitleID" />
+          </Key>
+          <Property Name="fJobTitleID" Type="int" Nullable="false" />
+          <Property Name="fTitleName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tOrderComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderID" Type="int" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fCustomerID" Type="int" />
+          <Property Name="fComment" Type="nvarchar(max)" />
+          <Property Name="fUpdateDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderID" Type="int" Nullable="false" />
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" />
+          <Property Name="fLenght" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fWidth" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fQuantity" Type="int" />
+          <Property Name="fGlassID" Type="int" />
+          <Property Name="fSubTotal" Type="money" />
+        </EntityType>
+        <EntityType Name="tOrders">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fEmployeeID" Type="int" />
+          <Property Name="fOrderDate" Type="date" />
+          <Property Name="fDliverDate1" Type="date" />
+          <Property Name="fGetMoneyBack1" Type="money" />
+          <Property Name="fDeliverDate2" Type="date" />
+          <Property Name="fGateMoneyBack2" Type="money" />
+          <Property Name="fDeliverDate3" Type="date" />
+          <Property Name="fGateMoneyBack3" Type="money" />
+          <Property Name="fDeliverDate4" Type="date" />
+          <Property Name="fGetMoneyBack4" Type="money" />
+          <Property Name="fCustomerID" Type="int" />
+          <Property Name="fMaterialPrice" Type="money" />
+          <Property Name="fDoorFee" Type="float" />
+          <Property Name="fScreenFee" Type="float" />
+          <Property Name="fInstallationFee" Type="float" />
+          <Property Name="fGlassFee" Type="float" />
+          <Property Name="fWaterwayFee" Type="float" />
+          <Property Name="fCrackFee" Type="float" />
+          <Property Name="fOrderConfirm" Type="bit" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tProductList">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fProductID" Type="nvarchar" MaxLength="10" />
+          <Property Name="fMaterialID" Type="nvarchar" MaxLength="10" />
+          <Property Name="fQuantity" Type="float" />
+          <Property Name="fType" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <Association Name="FK_GlassID">
+          <End Role="tGlass" Type="Self.tGlass" Multiplicity="0..1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGlass">
+              <PropertyRef Name="fGlassID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fGlassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersID">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductID">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="0..1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tCheck" Type="Self.tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomers_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tCustomers">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartment">
+          <End Role="tDepartment" Type="Self.tDepartment" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartment">
+              <PropertyRef Name="fDepartmentID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tJobTitle">
+          <End Role="tJobTitle" Type="Self.tJobTitle" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tJobTitle">
+              <PropertyRef Name="fJobTitleID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tOrders">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tAluminumMaterialList">
+          <End Role="tAluminumMaterialList" Type="Self.tAluminumMaterialList" Multiplicity="0..1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAluminumMaterialList">
+              <PropertyRef Name="fMaterialID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fMaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="0..1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbMSIT126Team02ModelStoreContainer">
+          <EntitySet Name="tAluminumMaterialList" EntityType="Self.tAluminumMaterialList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCheck" EntityType="Self.tCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCustomers" EntityType="Self.tCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDepartment" EntityType="Self.tDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tGlass" EntityType="Self.tGlass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tJobTitle" EntityType="Self.tJobTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderComment" EntityType="Self.tOrderComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrders" EntityType="Self.tOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tProductList" EntityType="Self.tProductList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GlassID" Association="Self.FK_GlassID">
+            <End Role="tGlass" EntitySet="tGlass" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersID" Association="Self.FK_OrdersID">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductID" Association="Self.FK_ProductID">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tCustomers" Association="Self.FK_tCheck_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tCheck" EntitySet="tCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomers_tEmployee" Association="Self.FK_tCustomers_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCustomers" EntitySet="tCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartment" Association="Self.FK_tEmployee_tDepartment">
+            <End Role="tDepartment" EntitySet="tDepartment" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tJobTitle" Association="Self.FK_tEmployee_tJobTitle">
+            <End Role="tJobTitle" EntitySet="tJobTitle" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tCustomers" Association="Self.FK_tOrderComment_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tEmployee" Association="Self.FK_tOrderComment_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tOrders" Association="Self.FK_tOrderComment_tOrders">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tEmployee" Association="Self.FK_tOrders_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tAluminumMaterialList" Association="Self.FK_tProductList_tAluminumMaterialList">
+            <End Role="tAluminumMaterialList" EntitySet="tAluminumMaterialList" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tProduct" Association="Self.FK_tProductList_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbMSIT126Team02Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tAluminumMaterialList">
+          <Key>
+            <PropertyRef Name="fMaterialID" />
+          </Key>
+          <Property Name="fMaterialID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AL_UnitWeight" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tProductList" Relationship="Self.FK_tProductList_tAluminumMaterialList" FromRole="tAluminumMaterialList" ToRole="tProductList" />
+        </EntityType>
+        <EntityType Name="tCheck">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <Property Name="fCheckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCheckMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fPaymentDay" Type="DateTime" Precision="0" />
+          <Property Name="fTaxID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fTicktedDay" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tCustomers" Relationship="Self.FK_tCheck_tCustomers" FromRole="tCheck" ToRole="tCustomers" />
+        </EntityType>
+        <EntityType Name="tCustomers">
+          <Key>
+            <PropertyRef Name="fCustomerID" />
+          </Key>
+          <Property Name="fCustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fUserName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fCompanyName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fTaxID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fContactName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fTelephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fFox" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fCity" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fLoginPassword" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="fName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tCheck" Relationship="Self.FK_tCheck_tCustomers" FromRole="tCustomers" ToRole="tCheck" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tCustomers_tEmployee" FromRole="tCustomers" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrderComment" Relationship="Self.FK_tOrderComment_tCustomers" FromRole="tCustomers" ToRole="tOrderComment" />
+        </EntityType>
+        <EntityType Name="tDepartment">
+          <Key>
+            <PropertyRef Name="fDepartmentID" />
+          </Key>
+          <Property Name="fDepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="fDepartmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tEmployee_tDepartment" FromRole="tDepartment" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tEmployee">
+          <Key>
+            <PropertyRef Name="fEmployeeID" />
+          </Key>
+          <Property Name="fEmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fLoginPassword" Type="Binary" MaxLength="32" FixedLength="true" />
+          <Property Name="fJobTitleID" Type="Int32" />
+          <Property Name="fDepartmentID" Type="Int32" />
+          <Property Name="fBirthday" Type="DateTime" Precision="0" />
+          <Property Name="fGender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="fHireDate" Type="DateTime" Precision="0" />
+          <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="fUserName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tCustomers" Relationship="Self.FK_tCustomers_tEmployee" FromRole="tEmployee" ToRole="tCustomers" />
+          <NavigationProperty Name="tDepartment" Relationship="Self.FK_tEmployee_tDepartment" FromRole="tEmployee" ToRole="tDepartment" />
+          <NavigationProperty Name="tJobTitle" Relationship="Self.FK_tEmployee_tJobTitle" FromRole="tEmployee" ToRole="tJobTitle" />
+          <NavigationProperty Name="tOrderComment" Relationship="Self.FK_tOrderComment_tEmployee" FromRole="tEmployee" ToRole="tOrderComment" />
+          <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrders_tEmployee" FromRole="tEmployee" ToRole="tOrders" />
+        </EntityType>
+        <EntityType Name="tGlass">
+          <Key>
+            <PropertyRef Name="fGlassID" />
+          </Key>
+          <Property Name="fGlassID" Type="Int32" Nullable="false" />
+          <Property Name="fGlassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fGlassPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tOrderDetail" Relationship="Self.FK_GlassID" FromRole="tGlass" ToRole="tOrderDetail" />
+        </EntityType>
+        <EntityType Name="tJobTitle">
+          <Key>
+            <PropertyRef Name="fJobTitleID" />
+          </Key>
+          <Property Name="fJobTitleID" Type="Int32" Nullable="false" />
+          <Property Name="fTitleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tEmployee_tJobTitle" FromRole="tJobTitle" ToRole="tEmployee" />
+        </EntityType>
+        <EntityType Name="tOrderComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderID" Type="Int32" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <Property Name="fComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fUpdateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tCustomers" Relationship="Self.FK_tOrderComment_tCustomers" FromRole="tOrderComment" ToRole="tCustomers" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrderComment_tEmployee" FromRole="tOrderComment" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrderComment_tOrders" FromRole="tOrderComment" ToRole="tOrders" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderID" Type="Int32" Nullable="false" />
+          <Property Name="fProductID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fLenght" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fWidth" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fQuantity" Type="Int32" />
+          <Property Name="fGlassID" Type="Int32" />
+          <Property Name="fSubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tGlass" Relationship="Self.FK_GlassID" FromRole="tOrderDetail" ToRole="tGlass" />
+          <NavigationProperty Name="tOrders" Relationship="Self.FK_OrdersID" FromRole="tOrderDetail" ToRole="tOrders" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_ProductID" FromRole="tOrderDetail" ToRole="tProduct" />
+        </EntityType>
+        <EntityType Name="tOrders">
+          <Key>
+            <PropertyRef Name="fOrderID" />
+          </Key>
+          <Property Name="fOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fEmployeeID" Type="Int32" />
+          <Property Name="fOrderDate" Type="DateTime" Precision="0" />
+          <Property Name="fDliverDate1" Type="DateTime" Precision="0" />
+          <Property Name="fGetMoneyBack1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate2" Type="DateTime" Precision="0" />
+          <Property Name="fGateMoneyBack2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate3" Type="DateTime" Precision="0" />
+          <Property Name="fGateMoneyBack3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDeliverDate4" Type="DateTime" Precision="0" />
+          <Property Name="fGetMoneyBack4" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fCustomerID" Type="Int32" />
+          <Property Name="fMaterialPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fDoorFee" Type="Double" />
+          <Property Name="fScreenFee" Type="Double" />
+          <Property Name="fInstallationFee" Type="Double" />
+          <Property Name="fGlassFee" Type="Double" />
+          <Property Name="fWaterwayFee" Type="Double" />
+          <Property Name="fCrackFee" Type="Double" />
+          <Property Name="fOrderConfirm" Type="Boolean" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrders_tEmployee" FromRole="tOrders" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrderComment" Relationship="Self.FK_tOrderComment_tOrders" FromRole="tOrders" ToRole="tOrderComment" />
+          <NavigationProperty Name="tOrderDetail" Relationship="Self.FK_OrdersID" FromRole="tOrders" ToRole="tOrderDetail" />
+        </EntityType>
+        <EntityType Name="tProduct">
+          <Key>
+            <PropertyRef Name="fProductID" />
+          </Key>
+          <Property Name="fProductID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tOrderDetail" Relationship="Self.FK_ProductID" FromRole="tProduct" ToRole="tOrderDetail" />
+          <NavigationProperty Name="tProductList" Relationship="Self.FK_tProductList_tProduct" FromRole="tProduct" ToRole="tProductList" />
+        </EntityType>
+        <EntityType Name="tProductList">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fProductID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fMaterialID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fQuantity" Type="Double" />
+          <Property Name="fType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tAluminumMaterialList" Relationship="Self.FK_tProductList_tAluminumMaterialList" FromRole="tProductList" ToRole="tAluminumMaterialList" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tProductList_tProduct" FromRole="tProductList" ToRole="tProduct" />
+        </EntityType>
+        <Association Name="FK_tProductList_tAluminumMaterialList">
+          <End Role="tAluminumMaterialList" Type="Self.tAluminumMaterialList" Multiplicity="0..1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAluminumMaterialList">
+              <PropertyRef Name="fMaterialID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fMaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCheck_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tCheck" Type="Self.tCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tCheck">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCustomers_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tCustomers">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tCustomers">
+          <End Role="tCustomers" Type="Self.tCustomers" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCustomers">
+              <PropertyRef Name="fCustomerID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tDepartment">
+          <End Role="tDepartment" Type="Self.tDepartment" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDepartment">
+              <PropertyRef Name="fDepartmentID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tJobTitle">
+          <End Role="tJobTitle" Type="Self.tJobTitle" Multiplicity="0..1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tJobTitle">
+              <PropertyRef Name="fJobTitleID" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="fJobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrders_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="fEmployeeID" />
+            </Principal>
+            <Dependent Role="tOrders">
+              <PropertyRef Name="fEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GlassID">
+          <End Role="tGlass" Type="Self.tGlass" Multiplicity="0..1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGlass">
+              <PropertyRef Name="fGlassID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fGlassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderComment_tOrders">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="0..1" />
+          <End Role="tOrderComment" Type="Self.tOrderComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderComment">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersID">
+          <End Role="tOrders" Type="Self.tOrders" Multiplicity="1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrders">
+              <PropertyRef Name="fOrderID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductID">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="0..1" />
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tOrderDetail">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductList_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="0..1" />
+          <End Role="tProductList" Type="Self.tProductList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="fProductID" />
+            </Principal>
+            <Dependent Role="tProductList">
+              <PropertyRef Name="fProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbMSIT126Team02Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tAluminumMaterialList" EntityType="Self.tAluminumMaterialList" />
+          <EntitySet Name="tCheck" EntityType="Self.tCheck" />
+          <EntitySet Name="tCustomers" EntityType="Self.tCustomers" />
+          <EntitySet Name="tDepartment" EntityType="Self.tDepartment" />
+          <EntitySet Name="tEmployee" EntityType="Self.tEmployee" />
+          <EntitySet Name="tGlass" EntityType="Self.tGlass" />
+          <EntitySet Name="tJobTitle" EntityType="Self.tJobTitle" />
+          <EntitySet Name="tOrderComment" EntityType="Self.tOrderComment" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" />
+          <EntitySet Name="tOrders" EntityType="Self.tOrders" />
+          <EntitySet Name="tProduct" EntityType="Self.tProduct" />
+          <EntitySet Name="tProductList" EntityType="Self.tProductList" />
+          <AssociationSet Name="FK_tProductList_tAluminumMaterialList" Association="Self.FK_tProductList_tAluminumMaterialList">
+            <End Role="tAluminumMaterialList" EntitySet="tAluminumMaterialList" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCheck_tCustomers" Association="Self.FK_tCheck_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tCheck" EntitySet="tCheck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCustomers_tEmployee" Association="Self.FK_tCustomers_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tCustomers" EntitySet="tCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tCustomers" Association="Self.FK_tOrderComment_tCustomers">
+            <End Role="tCustomers" EntitySet="tCustomers" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tDepartment" Association="Self.FK_tEmployee_tDepartment">
+            <End Role="tDepartment" EntitySet="tDepartment" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tJobTitle" Association="Self.FK_tEmployee_tJobTitle">
+            <End Role="tJobTitle" EntitySet="tJobTitle" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tEmployee" Association="Self.FK_tOrderComment_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrders_tEmployee" Association="Self.FK_tOrders_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrders" EntitySet="tOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GlassID" Association="Self.FK_GlassID">
+            <End Role="tGlass" EntitySet="tGlass" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderComment_tOrders" Association="Self.FK_tOrderComment_tOrders">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderComment" EntitySet="tOrderComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersID" Association="Self.FK_OrdersID">
+            <End Role="tOrders" EntitySet="tOrders" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductID" Association="Self.FK_ProductID">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductList_tProduct" Association="Self.FK_tProductList_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductList" EntitySet="tProductList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbMSIT126Team02ModelStoreContainer" CdmEntityContainer="dbMSIT126Team02Entities1">
+          <EntitySetMapping Name="tAluminumMaterialList">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tAluminumMaterialList">
+              <MappingFragment StoreEntitySet="tAluminumMaterialList">
+                <ScalarProperty Name="fMaterialID" ColumnName="fMaterialID" />
+                <ScalarProperty Name="AL_UnitWeight" ColumnName="AL_UnitWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCheck">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tCheck">
+              <MappingFragment StoreEntitySet="tCheck">
+                <ScalarProperty Name="fID" ColumnName="fID" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fCheckNumber" ColumnName="fCheckNumber" />
+                <ScalarProperty Name="fCheckMoney" ColumnName="fCheckMoney" />
+                <ScalarProperty Name="fPaymentDay" ColumnName="fPaymentDay" />
+                <ScalarProperty Name="fTaxID" ColumnName="fTaxID" />
+                <ScalarProperty Name="fTicktedDay" ColumnName="fTicktedDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCustomers">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tCustomers">
+              <MappingFragment StoreEntitySet="tCustomers">
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+                <ScalarProperty Name="fCompanyName" ColumnName="fCompanyName" />
+                <ScalarProperty Name="fTaxID" ColumnName="fTaxID" />
+                <ScalarProperty Name="fContactName" ColumnName="fContactName" />
+                <ScalarProperty Name="fTelephone" ColumnName="fTelephone" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fFox" ColumnName="fFox" />
+                <ScalarProperty Name="fCity" ColumnName="fCity" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fLoginPassword" ColumnName="fLoginPassword" />
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDepartment">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tDepartment">
+              <MappingFragment StoreEntitySet="tDepartment">
+                <ScalarProperty Name="fDepartmentID" ColumnName="fDepartmentID" />
+                <ScalarProperty Name="fDepartmentName" ColumnName="fDepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEmployee">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tEmployee">
+              <MappingFragment StoreEntitySet="tEmployee">
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fLoginPassword" ColumnName="fLoginPassword" />
+                <ScalarProperty Name="fJobTitleID" ColumnName="fJobTitleID" />
+                <ScalarProperty Name="fDepartmentID" ColumnName="fDepartmentID" />
+                <ScalarProperty Name="fBirthday" ColumnName="fBirthday" />
+                <ScalarProperty Name="fGender" ColumnName="fGender" />
+                <ScalarProperty Name="fHireDate" ColumnName="fHireDate" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+                <ScalarProperty Name="fUserName" ColumnName="fUserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tGlass">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tGlass">
+              <MappingFragment StoreEntitySet="tGlass">
+                <ScalarProperty Name="fGlassID" ColumnName="fGlassID" />
+                <ScalarProperty Name="fGlassName" ColumnName="fGlassName" />
+                <ScalarProperty Name="fGlassPrice" ColumnName="fGlassPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tJobTitle">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tJobTitle">
+              <MappingFragment StoreEntitySet="tJobTitle">
+                <ScalarProperty Name="fJobTitleID" ColumnName="fJobTitleID" />
+                <ScalarProperty Name="fTitleName" ColumnName="fTitleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderComment">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tOrderComment">
+              <MappingFragment StoreEntitySet="tOrderComment">
+                <ScalarProperty Name="fID" ColumnName="fID" />
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fComment" ColumnName="fComment" />
+                <ScalarProperty Name="fUpdateDate" ColumnName="fUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderDetail">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tOrderDetail">
+              <MappingFragment StoreEntitySet="tOrderDetail">
+                <ScalarProperty Name="fID" ColumnName="fID" />
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+                <ScalarProperty Name="fLenght" ColumnName="fLenght" />
+                <ScalarProperty Name="fWidth" ColumnName="fWidth" />
+                <ScalarProperty Name="fQuantity" ColumnName="fQuantity" />
+                <ScalarProperty Name="fGlassID" ColumnName="fGlassID" />
+                <ScalarProperty Name="fSubTotal" ColumnName="fSubTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrders">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tOrders">
+              <MappingFragment StoreEntitySet="tOrders">
+                <ScalarProperty Name="fOrderID" ColumnName="fOrderID" />
+                <ScalarProperty Name="fEmployeeID" ColumnName="fEmployeeID" />
+                <ScalarProperty Name="fOrderDate" ColumnName="fOrderDate" />
+                <ScalarProperty Name="fDliverDate1" ColumnName="fDliverDate1" />
+                <ScalarProperty Name="fGetMoneyBack1" ColumnName="fGetMoneyBack1" />
+                <ScalarProperty Name="fDeliverDate2" ColumnName="fDeliverDate2" />
+                <ScalarProperty Name="fGateMoneyBack2" ColumnName="fGateMoneyBack2" />
+                <ScalarProperty Name="fDeliverDate3" ColumnName="fDeliverDate3" />
+                <ScalarProperty Name="fGateMoneyBack3" ColumnName="fGateMoneyBack3" />
+                <ScalarProperty Name="fDeliverDate4" ColumnName="fDeliverDate4" />
+                <ScalarProperty Name="fGetMoneyBack4" ColumnName="fGetMoneyBack4" />
+                <ScalarProperty Name="fCustomerID" ColumnName="fCustomerID" />
+                <ScalarProperty Name="fMaterialPrice" ColumnName="fMaterialPrice" />
+                <ScalarProperty Name="fDoorFee" ColumnName="fDoorFee" />
+                <ScalarProperty Name="fScreenFee" ColumnName="fScreenFee" />
+                <ScalarProperty Name="fInstallationFee" ColumnName="fInstallationFee" />
+                <ScalarProperty Name="fGlassFee" ColumnName="fGlassFee" />
+                <ScalarProperty Name="fWaterwayFee" ColumnName="fWaterwayFee" />
+                <ScalarProperty Name="fCrackFee" ColumnName="fCrackFee" />
+                <ScalarProperty Name="fOrderConfirm" ColumnName="fOrderConfirm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProduct">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tProduct">
+              <MappingFragment StoreEntitySet="tProduct">
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tProductList">
+            <EntityTypeMapping TypeName="dbMSIT126Team02Model.tProductList">
+              <MappingFragment StoreEntitySet="tProductList">
+                <ScalarProperty Name="fID" ColumnName="fID" />
+                <ScalarProperty Name="fProductID" ColumnName="fProductID" />
+                <ScalarProperty Name="fMaterialID" ColumnName="fMaterialID" />
+                <ScalarProperty Name="fQuantity" ColumnName="fQuantity" />
+                <ScalarProperty Name="fType" ColumnName="fType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

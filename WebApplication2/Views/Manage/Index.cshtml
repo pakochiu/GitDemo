@@ -1,0 +1,154 @@
+﻿@model WebApplication2.Models.IndexViewModel
+@{
+    ViewBag.Title = "帳戶管理 - 更改帳戶設定";
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/LoginPage.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Microsoft JhengHei';
+    }
+
+    dt {
+        color: aliceblue;
+        margin-bottom:15px;    
+    }
+
+    dd a {
+        color: aliceblue;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #337AB7;
+    }
+
+    a:hover {
+        text-decoration: none;
+        background-color: #286090;
+        color: aliceblue;
+    }
+
+
+    #abc {
+        color: aliceblue;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #337AB7;
+    }
+
+
+    .btn btn-link {
+        
+        text-decoration: none;
+        
+    }
+
+    .login-wrap {
+        width: 100%;
+        margin: auto;
+        min-height: 570px;
+        position: relative;
+        box-shadow: 0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19);
+        }
+    .login-html {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 90px 70px 50px 70px;
+        background: #1d7da3;
+    }
+</style>
+<div class="Detail">
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">帳戶管理</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"> </label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+
+                    <p class="text-success">@ViewBag.StatusMessage</p>
+                    <div>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>管理密碼:</dt>
+                            <dd>
+
+                                @if (Model.HasPassword)
+                                {
+                                    @Html.ActionLink("更變密碼", "ChangePassword")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("建立密碼", "SetPassword")
+                                }
+
+                            </dd>
+                            <dt>外部登入:</dt>
+                            <dd>
+                                @Html.ActionLink("管理登入", "ManageLogins")
+                                @Model.Logins.Count 個外部帳號
+                            </dd>
+
+
+                            <dt>手機號碼:</dt>
+                            <dd>
+                                @if (Model.PhoneNumber != null)
+                                {
+                                    @Html.ActionLink("修改", "AddPhoneNumber")
+                                    @: &nbsp;|&nbsp;
+                                    @Html.ActionLink("移除", "RemovePhoneNumber")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("新增", "AddPhoneNumber")
+                                }
+                                @*@(Model.PhoneNumber ?? "沒有設定")*@
+                            </dd>
+                            <dt>公司資訊:</dt>
+                            @{
+                                dbMSIT126TeamEntities db = new dbMSIT126TeamEntities();
+
+                                var USName = User.Identity.Name;
+
+                                var userRegistered = db.tCustomers.Where(p => p.fUserName == USName).FirstOrDefault();
+
+                                if (userRegistered != null)
+                                {
+                                    <dd>@Html.ActionLink("修改", "EditCompany")</dd>
+                                }
+                                else
+                                {
+                                    <dd>@Html.ActionLink("修改", "Registeration", "Member")</dd>
+                                }
+                            }
+
+                            <dt>兩段驗證:</dt>
+                            <dd>
+                                @if (Model.TwoFactor)
+                                {
+                                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <text>
+                                            <input type="submit" value="停用" class="btn btn-danger" style="padding:5px; line-height:1.42857143;border-radius:5px; font: 600 16px/18px; font-weight:bold" />
+                                            啟用</text>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <text>
+                                            <input type="submit" value="啟用" class="btn btn-primary" style="padding:5px; line-height:1.42857143;border-radius:5px; font: 600 16px/18px; font-weight:bold" />
+                                            停用</text>
+                                    }
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

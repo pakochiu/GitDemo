@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Start of  Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=eaf30f2a-7204-4056-b62b-f26549ff0d96"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <!-- End of  Zendesk Widget script -->
+
+
+    <title>@ViewBag.Title - 鋁窗公司</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @using System.Web.Security;
+
+    <style>
+        html {
+            font-family: 'Microsoft JhengHei';
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei';
+        }
+
+        .fromLogin {
+            margin-top: 12px;
+            margin-left: 188px;
+        }
+
+            .fromLogin span {
+                margin-top: 1px;
+                margin-right: 3px;
+                color: white
+            }
+
+        .loginbtn {
+            background: white;
+            color: black;
+            margin-left: 5px;
+        }
+
+        .navbar-inverse {
+            border-color: #19496e;
+            background: #19496e;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #DCD0B3;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: #7f9576;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" >
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="padding-top: 20px">
+                    <li><a href="~/Home/Index" style="padding: 0"><img src="~/Image/Logo/CompanyLogo.png" style="height:50px; width:auto; " /></a></li>
+                    <li>@Html.ActionLink("產品目錄", "Product", "Home")</li>
+                    <li>@Html.ActionLink("聯絡我們", "Contact", "Home")</li>
+                    <li>@Html.Partial("_CustomerPartial")</li>
+                    <li id="Cart">
+                        @Html.Partial("_CartPartial")
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="text-align:center; color: #000000; font-weight:bold">格囹欄鋁窗有限公司&copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

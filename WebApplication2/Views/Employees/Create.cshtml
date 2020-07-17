@@ -1,0 +1,299 @@
+﻿@model WebApplication2.tEmployee
+
+@{
+    ViewBag.Title = "應徵資料";
+    Layout = "~/Views/Shared/_LayoutPageEmploymentLogin.cshtml";
+}
+<style>
+    body {
+       font-family: 'Microsoft JhengHei'
+    }
+
+    .stepwizard-step p {
+        margin-top: 0px;
+        color: #666;
+    }
+
+    .stepwizard-row {
+        display: table-row;
+    }
+
+    .stepwizard {
+        display: table;
+        width: 100%;
+        position: relative;
+    }
+
+    .stepwizard-step button[disabled] {
+        opacity: 1 !important;
+        filter: alpha(opacity=100) !important;
+    }
+
+    .stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+        opacity: 1 !important;
+        color: #bbb;
+    }
+
+    .stepwizard-row:before {
+        top: 14px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        z-index: 0;
+    }
+
+    .stepwizard-step {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+    }
+
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+
+    .h4, h4 {
+        font-size: 18px;
+        margin-top: 60px;
+        padding-top: 30px;
+    }
+</style>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal container" style="background-color:ghostwhite">
+
+    <form method="post" action="Create">
+
+        <div class="container" style="height:700px;">
+            <h4>應徵資料</h4>
+            <div class="stepwizard">
+                <div class="stepwizard-row setup-panel">
+                    <div class="stepwizard-step col-xs-3">
+                        <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                        <p><small>應徵同意書</small></p>
+                    </div>
+                    <div class="stepwizard-step col-xs-3">
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        <p><small>基本資料</small></p>
+                    </div>
+                    <div class="stepwizard-step col-xs-3">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <p><small>聯絡資料</small></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="panel panel-primary setup-content" id="step-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">應徵同意書</h3>
+                </div>
+                <div class="panel-body">
+                    <textarea readonly cols="150" rows="15" disabled class="form-control">
+您在線上點選「同意」，表示已同意遵守加入「XX公司」應徵同意書，成為本公司專屬員工，為確保您的權益，請詳閱以下同意書。
+
+一、遵守員工規範及法律規定
+您了解加入成為員工後可使用本公司公告之專屬服務，並同意接受本公司之員工規範及遵守當地之法律規定。
+
+二、員工帳號及密碼
+凡經本會同意成為本公司專屬員工者，均可獲得由您自行建立之一組帳號及密碼，每一個人員工僅得申請一組帳號及密碼。
+
+三、員工資料之提供
+您同意提供並維持正確、精確、最新及完整的個人資料，若您提供任何錯誤、不實、過時或不完整的資料，或者本會有合理理由懷疑個人基本資料為錯誤、不實、過時或不完整，本會有權終止您的帳號並暫停本服務，並拒絕您於現在和未來使用本服務之全部或一部分。
+
+四、員工規範之修改
+本公司保留隨時修改本員工規範之權利，將於修改員工規範時，於本公司首頁公告之，不另作員工個別通知。如果員工不同意修改的內容，請勿繼續使用本公司服務。如員工繼續使用本公司服務，即視為員工已同意接受修改後之員工規範。
+
+五、服務之停止與更改
+於發生下列情形之一時，本公司有權停止或中斷提供服務：
+
+對本公司之電子通信設備進行必要之保養及施工時。
+發生突發性之電子通信設備故障時。
+由於本公司所申請之電子通信服務被停止，無法提供服務時。
+由於天災等不可抗力之因素致使無法提供服務時。
+員工應了解並同意，本會雖盡力維持本公司之正常運作，但仍可能因故導致全部或一部分之系統中斷、暫時無法使用、遲延、資料傳輸或儲存上之錯誤、或遭第三人侵入系統篡改或偽造變造資料等，員工不得因此要求任何補償或賠償。
+六、風險承擔
+員工同意使用本公司各項服務係基於員工的個人意願，並同意自負風險。
+
+七、保管及通知義務
+員工有義務妥善保管在本公司之帳號與密碼，並為使用該帳號與密碼登入系統後所進行負責。為維護員工自身權益，請勿將帳號與密碼洩露或提供予第三之一切活動人知悉，或出借或轉讓他人使用。若員工發現帳號或密碼遭人非法使用或有任何異常破壞使用安全之情形時，應立即通知本公司。
+
+八、員工資料保護
+員工所登錄或留存之個人資料，除下列情況外，本公司同意在未獲得員工同意前，不對外揭露員工之姓名、地址、電子郵件地址及其他依法受保護之個人資料：
+
+基於法律之規定。
+受司法機關或其他有權機關基於法定程序之要求。
+為保障本公司之財產及權益。
+為維護其他員工或第三人之人身安全所採取之必要措施。
+九、員工資料之使用
+員工登錄留存之資料，本公司得於前條【員工資料保護】之前提下，於合理範圍內使用相關員工資料、或為其他合法之使用。
+
+十、賠償責任限制
+本公司對於員工使用各項服務、或無法使用各項服務所產生之任何直接、間接、衍生、或特別損害，不負任何賠償責任。若員工使用之服務係有對價者，本公司於員工所付之對價範圍內，負賠償責任，惟依法不得限制賠償責任者，則該限制規定不予適用。
+
+十一、智財權
+本公司上之所有著作及資料，其著作權、專利權、商標、營業秘密、其他智慧財產權、所有權或其他權利，均為「財團法人證券暨期貨市場發展基金會」所有，除事先經本公司或其權利人之合法授權外，員工不得擅自重製、傳輸、改作、編輯或以其他任何形式、基於任何目的加以使用，否則應負所有法律責任。
+
+十二、連結
+在公司或所有服務相關網頁上所提供之所有連結，可能連結到其他個人、公司或組織之公司，提供該等連結之目的，僅係為便利員工自行搜集或取得資訊，本公司對於被連結之該等個人、公司或組織之公司上所提供之產品、服務或資訊，既不擔保其真實性、完整性、即時性或可信度，該等個人、公司或組織亦不因此而當然與本公司有任何僱佣、委任、代理、合夥或其他類似之關係 。
+
+十三、員工的義務與責任
+員工對員工本身於本公司或透過本公司傳輸的一切內容自負全責。
+員工承諾遵守中華民國相關法規及一切國際網際網路規定與慣例。若使用本公司台灣地區以外之公司，同意遵守各該公司當地之法令及網路慣例。
+員工同意不公布或傳送任何毀謗、不實、威脅、不雅、猥褻、不法、攻擊性、毀謗性或侵害他人智慧財產權的文字，圖片或任何形式的檔案於本公司上。
+員工同意不會於本公司上從事廣告或販賣商品行為。
+員工在公眾討論區討論或發表文章，應尊重他人的權益及隱私權。
+員工同意必須充份尊重著作權，禁止發表侵害他人各項智慧財產權之文字、圖片或任何形式的檔案。
+十四、個別條款之效力
+本同意書所定之任何員工條款之全部或一部分無效時，不影響其他條款之效力。
+
+十五、準據法及管轄法院
+本同意書之解釋及適用、以及員工因使用本服務而與本公司間所生之權利義務關係，應依中華民國法令解釋適用之。其因此所生之爭議，以台灣台北地方法院為第一審管轄法院。
+</textarea>
+                    <br />
+                    <label class="checkbox-inline"><input type="checkbox" value="false" id="check" onchange="myFunction()">同意</label>
+                    <br />
+                    <button class="btn btn-primary nextBtn pull-right" type="button" id="choices" disabled>Next</button>
+                </div>
+            </div>
+            <div class="panel panel-primary setup-content" id="step-2">
+                <div class="panel-heading">
+                    <h3 class="panel-title">基本資料</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        姓名
+                        @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Enter your name" } })
+                        @Html.ValidationMessageFor(model => model.fName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        生日
+                        @Html.TextBoxFor(model => model.fBirthday, new { @type = "date", @class = "form-control datepicker", @Value = DateTime.Now.AddYears(-30).ToString("yyyy-MM-dd") })
+                        @Html.ValidationMessageFor(model => model.fBirthday, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        性別
+                        <div><label class="form-check-label">
+                            @Html.RadioButtonFor(model => model.fGender, "M", new { htmlAttributes = new { @class = "form-check-input" } }) 男
+                        </label></div>
+                        <label class="form-check-label">
+                            @Html.RadioButtonFor(model => model.fGender, "F", new { htmlAttributes = new { @class = "form-check-input" } }) 女
+                        </label>
+                        @Html.ValidationMessageFor(model => model.fGender, "", new { @class = "text-danger" })
+                    </div>
+                    <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary setup-content" id="step-3">
+                <div class="panel-heading">
+                    <h3 class="panel-title">聯絡資料</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        電子郵件
+
+                        @Html.EditorFor(model => model.fEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your Email" } })
+                        @Html.ValidationMessageFor(model => model.fEmail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        電話
+                        @Html.EditorFor(model => model.fPhone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fPhone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        地址
+                        @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+                    </div>
+                    <input class="btn btn-primary nextBtn pull-right" type="submit" value="提交" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-default" id="buttom1">新進人員001</button>
+    <button class="btn btn-default" id="buttom2">新進人員002</button>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+    $(document).ready(function () {
+
+        var navListItems = $('div.setup-panel div a'),
+            allWells = $('.setup-content'),
+            allNextBtn = $('.nextBtn');
+
+        allWells.hide();
+
+        navListItems.click(function (e) {
+            e.preventDefault();
+            var $target = $($(this).attr('href')),
+                $item = $(this);
+
+            if (!$item.hasClass('disabled')) {
+                navListItems.removeClass('btn-success').addClass('btn-default');
+                $item.addClass('btn-success');
+                allWells.hide();
+                $target.show();
+                $target.find('input:eq(0)').focus();
+            }
+        });
+
+        allNextBtn.click(function () {
+            var curStep = $(this).closest(".setup-content"),
+                curStepBtn = curStep.attr("id"),
+                nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                curInputs = curStep.find("input[type='text'],input[type='url']"),
+                isValid = true;
+
+            $(".form-group").removeClass("has-error");
+            for (var i = 0; i < curInputs.length; i++) {
+                if (!curInputs[i].validity.valid) {
+                    isValid = false;
+                    $(curInputs[i]).closest(".form-group").addClass("has-error");
+                }
+            }
+
+            if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+        });
+
+        $('div.setup-panel div a.btn-success').trigger('click');
+    });
+    var checker = document.getElementById("check");
+    var sendbtn = document.getElementById("choices");
+    checker.onchange = function () {
+        sendbtn.disabled = !this.checked;
+    };
+
+    $("#buttom1").click(function () {
+        $("#fName").val("劉大明")
+        $("#fEmail").val("galaxy@gmail.com")
+        $("#fPhone").val("0988111222")
+        $("#fAddress").val("台北市北投區石牌路二段五十號")
+    })
+    $("#buttom2").click(function () {
+        $("#fName").val("白倒楣")
+        $("#fEmail").val("badlucky@gmail.com")
+        $("#fPhone").val("0988000111")
+        $("#fAddress").val("台北市北投區石牌路一段20號")
+    })
+</script>

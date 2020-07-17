@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNet.Identity;
+@model List<WebApplication2.tProduct>
+@{
+    ViewBag.Title = "Product";
+
+    //using identity 抓 user 資訊
+    var UserID = User.Identity.GetUserId();
+    var UserName = User.Identity.Name;
+}
+
+<style>
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .container .image:hover {
+        opacity: 0.3;
+    }
+
+    .container .middle:hover {
+        opacity: 1;
+    }
+
+    .text {
+        background-color: #19496e;
+        color: white;
+        font-size: 16px;
+        padding: 16px 32px;
+    }
+
+    .btn {
+        background-color: #19496e;
+        color: white;
+    }
+
+    .modal-dialog{
+        width:800px;
+    }
+
+    #theMyDiv img{
+        margin-left:auto;
+        margin:auto;
+        width:750px;
+    }
+
+    .pageTitle {
+        margin: 80px auto 40px auto;
+    }
+
+</style>
+
+
+<div class="container-fluid text-center bg-grey">
+    <h2 class="pageTitle">產品目錄</h2>
+    <div class="row text-center">
+        @foreach (var item in this.Model.GroupBy(p => p.fGroup).OrderBy(p => p.Key))
+        {
+            <form action="~/ProductList/ProductList" method="post">
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="/Image/ProductImages/@(item.Key).jpg" class="image" />
+                        <div class="middle">
+                            <!-- 彈跳視窗按鈕 -->
+                            <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="@item.Key">
+                                檢　視
+                            </a>
+                        </div>
+                        <p><strong>@item.Key</strong></p>
+                        <input name="fGroup" value="@item.Key" hidden="hidden" />
+                        <input type="submit" value="詳細清單" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+<!-- 彈跳視窗 start -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="theMyDiv">
+                <!--圖片塞這裡-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 彈跳視窗 end -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('form a').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'get',
+            url: '@Url.Action("thePopupImage", "ProductList")',
+            data: {
+                theKey: $(this).attr('id')
+            }
+        })
+        .done(function (img) {
+            //將回傳的圖片塞到 #pop-up-Image 裡面
+            $('#theMyDiv').html(img)
+        })
+    });
+</script>
+

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebApplication2.tCheck>
+@{ Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";}
+<style>
+    .table th {
+        text-align: center;
+    }
+
+    .table td {
+        text-align: center;
+    }
+</style>
+
+<p style="text-align:right;margin-top:10px">@Html.ActionLink("回到帳務總覽", "allCheckBook")</p>
+<h1 style="text-align:center">帳務本資源回收桶</h1>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tCustomer.fCompanyName)*@
+            客戶名稱
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fCheckNumber)*@
+            付款字號
+        </th>
+        <th>
+            付款期數
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fCheckMoney)*@
+            支付金額
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fPaymentDay)*@
+            支付日期
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fTaxID)*@
+            統一編號
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fTicktedDay)*@
+            兌付日期
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fPaymentStatus)*@
+            付款狀態
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fPayByCash)*@
+            付款方式
+        </th>
+        <th>
+            編輯資料
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tCustomer.fCompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCheckNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fPaymentPeriod)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.fCheckMoney)*@
+                @{
+                    string money = (Math.Round((item.fCheckMoney), 0)).ToString("C0");
+                    @money;
+                }
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.fPaymentDay)*@
+                @{
+                    string payDay = item.fPaymentDay.Date.ToString("yyyy/MM/dd");
+                    @payDay;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tCustomer.fTaxID)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.fTicktedDay)*@
+                @{
+                    string ticketDay = item.fTicktedDay.Date.ToString("yyyy/MM/dd");
+                    @ticketDay;
+                }
+            </td>
+            <td>
+                @{
+                    string status = "";
+
+                    if (item.fPaymentStatus == true)
+                    {
+                        status = "已付款";
+                    }
+                    else if (item.fPaymentStatus == false)
+                    {
+                        status = "尚未付款";
+                    }
+
+                    @status;
+                }
+                @*@Html.DisplayFor(modelItem => item.fPaymentStatus)*@
+            </td>
+            <td>
+                @{
+                    string statusPC = "";
+
+                    if (item.fPayByCash == true)
+                    {
+                        statusPC = "現金付款";
+                    }
+                    else if (item.fPayByCash == false)
+                    {
+                        statusPC = "支票付款";
+                    }
+
+                    @statusPC;
+                }
+                @*@Html.DisplayFor(modelItem => item.fPaymentStatus)*@
+            </td>
+            <td>
+                @Html.ActionLink("還原", "restore", new { id = item.fID }, new { type = "button", Class = "btn btn-success" })
+                @Html.ActionLink("刪除", "realDelete", new { id = item.fID }, new { OnClick = "return confirm('確定要刪除嗎？')", type = "button", Class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

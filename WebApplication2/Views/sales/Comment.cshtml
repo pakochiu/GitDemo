@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplication2.tOrderComment>
+
+@{
+
+    ViewBag.Title = "備註";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<h2>編號：@ViewBag.thecomment　的訂單備註</h2>
+
+
+
+<p Class="btn btn-success" style="color:white">
+    @Html.ActionLink("新增備註", "NewComment", new { Class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            訂單編號
+        </th>
+
+        <th>
+            備註
+        </th>
+        <th>
+            備註日期
+        </th>
+        <th>
+            備註業務
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tOrder.fOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fComment)
+            </td>
+            <td>
+                @{
+                    string oddate = item.fUpdateDate.Date.ToString("yyyy/MM/dd");
+                    @oddate;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tEmployee.fName)
+            </td>
+
+            <td>
+                @Html.ActionLink("編輯", "EditComment", new { id = item.fID }, new { Class = "btn btn-primary" })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.fID })*@
+            </td>
+        </tr>
+    }
+
+</table>

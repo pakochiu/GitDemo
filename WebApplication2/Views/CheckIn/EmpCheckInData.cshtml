@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebApplication2.tWorkingTime>
+
+@{
+    ViewBag.Title = "EmpCheckInData";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<style>
+    body {
+        font-family: 'Microsoft JhengHei'
+    }
+
+    td a {
+        border: none;
+        color: aliceblue;
+        background: #138496;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
+        td a:hover {
+            border: none;
+            color: aliceblue;
+            background: #249e8a;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+</style>
+
+<table class="table">
+    <tr>
+        <th>
+            員工
+        </th>
+        <th>
+            職稱
+        </th>
+        <th>
+            部門
+        </th>
+        <th>
+            日期
+        </th>
+        <th>
+            上班時間
+        </th>
+        <th>
+            下班時間
+        </th>
+        <th>
+            補簽記錄
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tFaceDetection.tEmployee.fName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tFaceDetection.tEmployee.tJobTitle.fTitleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tFaceDetection.tEmployee.tDepartment.fDepartmentName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tDate.fDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fStartWorkingTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fOffWorkingTime)
+    </td>
+    <td>
+        @Html.ActionLink("補簽", "Edit", new { id = item.fWorkingID })
+    </td>
+</tr>
+    }
+
+</table>

@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "首頁";
+}
+
+
+   <link href="~/Content/IndexCSS.css" rel="stylesheet" />
+
+
+<div class="main-banner">
+    <img class="img-banner" src="~/Image/Banner/aluminumWindowFrame01.jpg" />
+    <div class="imgMessage">匠心製作，完美呈現</div>
+</div>
+
+<section>
+    <div>
+        <p class="subtitles">公司簡介</p>
+        <div>
+            <p class="text-justify">
+                DK時尚精品窗致力於提供顧客最滿意的產品（氣密窗/隔音窗/鋁門窗）與服務。堅持台灣製造，從設計研發到生產，秉持著最高規格的標準（TAF ISO 9001:2015與CNS正字標記雙驗證），來為門窗的品質把關，兼具隔音、水密、氣密與抗風壓等實質功能，更強調產品的外觀設計。讓產品不僅具有實質功能，同時擁有美觀的造型設計，讓門窗與整體空間產生最合宜的搭配。
+            </p>
+            <p class="text-justify">
+                對於合作夥伴（消費者、設計師、建築師、門窗經銷商），以顧客需求為服務的中心，只有在真正了解客戶需求後，才能提出最符合期待的系統門窗規劃建議，讓顧客感受到最真心誠意的服務過程，是DK精品窗對顧客的保證。售後服務更是DK精品窗永續經營的基石，客戶滿意的笑容永遠是品牌成長的動力。
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <p class="subtitles">歷史作品</p>
+
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame02.jpg" />
+        <div class="middle">
+            <div class="text">方舟旅店</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame03.jpg" />
+        <div class="middle">
+            <div class="text">璞園建設</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame04.jpg" />
+        <div class="middle">
+            <div class="text">清境民宿</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame05.jpg" />
+        <div class="middle">
+            <div class="text">紫藤廬</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame06.jpg" />
+        <div class="middle">
+            <div class="text">天使美術館</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame07.jpg" />
+        <div class="middle">
+            <div class="text">亞洲藝術中心</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame08.jpg" />
+        <div class="middle">
+            <div class="text">麗都飯店</div>
+        </div>
+    </div>
+    <div class="History-img">
+        <img src="~/Image/Window/aluminumWindowFrame09.jpg" />
+        <div class="middle">
+            <div class="text">湛盧咖啡</div>
+        </div>
+    </div>
+</section>
+
+<!--==================-->
+<!--以下測試 Google Map-->
+<!--==================-->
+
+<section style="margin-top:10px">
+    <p class="subtitles">作品位置</p>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: { lat: 25.035753, lng: 121.540101 }
+            });
+
+            setMarkers(map);
+        }
+
+        var myPoint = [
+            ['湛盧咖啡', 25.041688, 121.544334, 4],
+            ['麗都飯店', 25.034011, 121.533706, 5],
+            ['方舟旅店', 25.034011, 121.531467, 3],
+            ['紫藤廬', 25.024846, 121.534287, 2],
+            ['亞洲藝術中心', 25.027976, 121.538128, 1],
+            ['沛林藥局', 25.042909, 121.550139, 6]
+        ];
+
+        function setMarkers(map) {
+            var shape = {
+                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                type: 'poly'
+            };
+
+            for (var i = 0; i < myPoint.length; i++) {
+                var myPoint1 = myPoint[i];
+                var marker = new google.maps.Marker({
+                    position: { lat: myPoint1[1], lng: myPoint1[2] },
+                    map: map,
+                    shape: shape,
+                    animation: google.maps.Animation.DROP,
+                    title: myPoint1[0],
+                    zIndex: myPoint1[3]
+                });
+            }
+
+            console.log(marker);
+            marker.addListener('click', toggleBounce);
+
+            function toggleBounce() {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+
+            var contentString = '<div id="content" style="font-family: Microsoft JhengHei">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h4 id="firstHeading" class="firstHeading" style="font-weight="bold"">沛林藥局</h4>' +
+                '<div id="bodyContent">' +
+                '<p><b>沛林藥局</b>  位於台北忠孝東路</br><b>完工日期 </b>2020年5月30日</p>' +
+                '</div>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+            type="text/javascript"></script>
+
+</section>
+
+

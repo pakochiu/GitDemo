@@ -1,0 +1,161 @@
+﻿@model WebApplication2.tNew
+
+@{
+    ViewBag.Title = "Newsupdate";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<style>
+    body {
+        font-family: 'Microsoft JhengHei'
+    }
+
+    input[type=search] {
+        background: none;
+        font-weight: bold;
+        border-color: #2e2e2e;
+        border-style: solid;
+        outline: none;
+        width: 250px;
+        border-radius: 15px;
+    }
+    /*Css to target the dropdownbox*/
+    ul.ui-autocomplete {
+        color: #4287f5 !important;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+    }
+
+    textarea {
+        background: none;
+        font-weight: bold;
+        border-color: #2e2e2e;
+        border-style: solid;
+        outline: none;
+        overflow: auto;
+        resize: none;
+    }
+
+    textarea:focus {
+        background: #ffffff;
+        font-weight: bold;
+        border-color: #2e2e2e;
+        border-style: solid;
+        outline: none;
+        overflow: auto;
+        resize: none;
+    }
+
+    .formnews {
+        margin: 5px 20px 20px 20px;
+        background: lightblue;
+        padding: 5px 20px 20px 20px;
+    }
+
+    .btn-default {
+        background-color: #2255a4;
+        font-weight:bold;
+        border-radius: 10px;
+    }
+
+        .btn-default:hover {
+            background-color: #fffb00;
+            font-weight: bold;
+            color: black;
+            border-radius: 10px;
+        }
+    .form-control {
+        background: none;
+        font-weight: bold;
+        border-color: #2e2e2e;
+        border-style: solid;
+        outline: none;
+        width: 250px;
+        border-radius: 15px;
+    }
+
+    input[type=date], input[type=datetime-local], input[type=month], input[type=time] {
+        -webkit-appearance: listbox;
+        border-radius: 15px;
+        width: 249px;
+        height: 38px;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+@*<link rel="stylesheet" href="/resources/demos/style.css">*@
+
+<div class="formnews">
+    <h2>客戶訊息推播</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="control-label col-md-2">日期</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fData, new { htmlAttributes = new { @class = "datepicker", type = "date", @Value = DateTime.Now.ToString("yyyy-MM-dd"), placeholder = DateTime.Now } })
+                    @Html.ValidationMessageFor(model => model.fData, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">目標客戶</label>
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model => model.tCustomer.fCompanyName)*@
+                    <input type="search" class="form-control" name="CustomerName" autocomplete="off">
+                    @Html.ValidationMessageFor(model => model.fCustomerID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">標題</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fSubject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fSubject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">內容</label>
+                <div class="col-md-10">
+                    <textarea name="fContent" style="width:400px; height:100px; border-radius: 15px"></textarea>
+                    @Html.ValidationMessageFor(model => model.fContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="推播訊息" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("inside");
+        $.ajax({
+            url: "CustomerList",
+            type: "GET",
+            success: function (data) {
+                var ja = JSON.parse(data)
+                console.log(ja)
+                $(".form-control").autocomplete({
+                    source: ja
+                })
+            }
+        })
+    })
+</script>
+

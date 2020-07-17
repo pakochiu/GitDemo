@@ -1,0 +1,145 @@
+﻿@model WebApplication2.tCheck
+@{ Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+    var tmp = Model.fPaymentPeriod;
+    dbMSIT126TeamEntities dbEdit = new dbMSIT126TeamEntities();
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1 style="text-align:center">編輯付款資料</h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fID)
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.fCustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fCustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fCustomerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.tCustomer.fCompanyName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("客戶名稱", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tCustomer.fCompanyName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.tCustomer.fCompanyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fTaxID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("統一編號", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tCustomer.fTaxID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.tCustomer.fTaxID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fCheckNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("訂單編號", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fOderID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.fOderID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fCheckNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("付款字號", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fCheckNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fCheckNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("付款期數", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="fPaymentPeriod" class="form-control" id="fPaymentPeriod">
+                    <option value="第一期">第一期</option>
+                    <option value="第二期">第二期</option>
+                    <option value="第三期">第三期</option>
+                    <option value="第四期">第四期</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fCheckMoney, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("支付金額", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fCheckMoney, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fCheckMoney, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fPaymentDay, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("支付日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fPaymentDay, new { @class = "form-control datepicker", @type = "date", @Value = Model.fPaymentDay.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.fPaymentDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fTicktedDay, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("兌付日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.fTicktedDay, new { @class = "form-control datepicker", @type = "date", @Value = Model.fTicktedDay.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.fTicktedDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.fPaymentStatus, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("付款狀態", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox" style="margin-left:30px">
+                    @Html.EditorFor(model => model.fPaymentStatus)
+                    @Html.ValidationMessageFor(model => model.fPaymentStatus, "", new { @class = "text-danger" })
+                    已付款
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @*@Html.LabelFor(model => model.fPayByCash, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Label("付款方式", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox" style="margin-left:30px">
+                    @Html.EditorFor(model => model.fPayByCash)
+                    @Html.ValidationMessageFor(model => model.fPayByCash, "", new { @class = "text-danger" })
+                    現金付款
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存" class="btn btn-success" />
+                @Html.ActionLink("取消", "editCheck", new { id = Model.fID }, new { type = "button", Class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("回到帳務總覽", "allCheckBook")
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+            $(function () {
+                $('#fPaymentPeriod').val('@Model.fPaymentPeriod')
+            })
+    </script>
+}

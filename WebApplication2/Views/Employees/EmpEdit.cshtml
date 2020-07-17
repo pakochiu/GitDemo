@@ -1,0 +1,106 @@
+﻿@model WebApplication2.tEmployee
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<form method="post" action="EmployeesController">
+    <div class="container">
+        <h4>修改職位與部門</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fEmployeeID)
+
+        <div class="form-group">
+            姓名
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control" , @readonly = "true" } })
+            </div>
+        </div>
+        <div class="form-group">
+            性別
+            <div class="col-md-10">
+                @{
+                    string Gender = "";
+
+                    if (Model.fGender == null)
+                    {
+                        Gender = "未選擇";
+                    }
+                    else if (Model.fGender.ToString() == "M")
+                    {
+                        Gender = "男性";
+                    }
+                    else
+                    {
+                        Gender = "女性";
+                    }
+                }
+                @Gender
+            </div>
+        </div>
+        <div class="form-group">
+            雇用日期
+            <div class="col-md-10">
+                @{
+                    string Hireday = "";
+                    if (Model.fHireDate != null)
+                    {
+                        Hireday = Model.fHireDate.Value.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        Hireday = null;
+                    }
+                }
+                @Html.TextBoxFor(model => model.fHireDate, new { @type = "date", @class = "form-control datepicker", @Value = Hireday, @readonly = "true" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            電話
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fPhone, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            </div>
+        </div>
+        <div class="form-group">
+            電子郵件
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fEmail, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            帳號
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fUserName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            </div>
+        </div>
+        <div class="form-group">
+            所屬部門
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.fDepartmentID, ViewBag.Deplist as SelectList, null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            擔任職位
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.fJobTitleID, ViewBag.joblist as SelectList, null, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+
+</script>
+

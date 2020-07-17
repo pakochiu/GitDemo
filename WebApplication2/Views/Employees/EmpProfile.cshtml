@@ -1,0 +1,113 @@
+﻿@model WebApplication2.tEmployee
+@{
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+
+}
+    <div class="form-horizontal container">
+        <h4>我的個人資料</h4>
+        <hr />
+        <div class="form-group">
+            姓名
+            <div class="col-xl-10 form-control">
+                @Html.DisplayFor(model => model.fName, "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            生日
+            @{
+                string birthday = "";
+                if (Model.fBirthday != null)
+                {
+                    birthday = Model.fBirthday.Value.ToString("yyyy/MM/dd");
+                }
+                else
+                {
+                    birthday = null;
+                }
+            }
+            <div class="col-md-10 form-control">
+                @birthday
+            </div>
+        </div>
+        <div class="form-group">
+            性別
+
+            @{
+                string Gender = "";
+
+                if (Model.fGender.ToString() == "F")
+                {
+                    Gender = "女性";
+                }
+                else if (Model.fGender.ToString() == "M")
+                {
+                    Gender = "男性";
+                }
+                else
+                {
+                    Gender = "還未選擇";
+                }
+            }
+            <div class="col-md-10 form-control">
+                @Html.Label(Gender)
+            </div>
+        </div>
+        <div class="form-group">
+            雇用日期
+            @{
+                string Hireday = "";
+                if (Model.fHireDate != null)
+                {
+                    Hireday = Model.fHireDate.Value.ToString("yyyy/MM/dd");
+                }
+                else
+                {
+                    Hireday = null;
+                }
+            }
+            <div class="col-md-10 form-control">
+                @Hireday
+            </div>
+        </div>
+        <div class="form-group">
+            手機
+            <div class="col-md-10 form-control ">
+                @Html.DisplayFor(model => model.fPhone)
+            </div>
+        </div>
+        <div class="form-group">
+            地址
+            <div class="col-md-10 form-control">
+                @Html.DisplayFor(model => model.fAddress)
+            </div>
+        </div>
+        <div class="form-group">
+            電子郵件
+            <div class="col-md-10 form-control">
+                @Html.DisplayFor(model => model.fEmail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            帳號
+            <div class="col-md-10 form-control">
+                @Html.DisplayFor(model => model.fUserName)
+            </div>
+        </div>
+        <div class="form-group">
+            所在部門
+            <div class="col-md-10 form-control">
+                @Html.DisplayFor(model => model.tDepartment.fDepartmentName)
+            </div>
+        </div>
+        <div class="form-group">
+            職位
+            <div class="col-md-10 form-control">
+                @Html.DisplayFor(model => model.tJobTitle.fTitleName)
+            </div>
+        </div>
+
+        <p>
+            @Html.ActionLink("編輯資訊", "myEdit", new { id = Model.fEmployeeID }, new { @type = "button", @class = "btn btn-primary" })
+        </p>
+    </div>

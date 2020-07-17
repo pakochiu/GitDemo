@@ -1,0 +1,207 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model IPagedList<WebApplication2.tCheck>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{  Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";}
+<style>
+    .table th {
+        text-align: center;
+    }
+
+    .table td {
+        text-align: center;
+    }
+
+    * {
+        font-family: 微軟正黑體;
+    }
+</style>
+@*資源回收桶圖示CDN*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<p style="text-align:right;margin-top:10px">@Html.ActionLink("新增付款資料", "addCheck")</p>
+
+<h1 style="text-align:center">工程帳務查詢</h1>
+
+@*查詢表單*@
+<form method="post" action="allCheckBook" id="querryForm" style="margin-left:20px">
+    <label><input type="checkbox" value="" name="search" style="margin:6px" />全部</label>
+    <label><input type="checkbox" value="true" name="search" style="margin:6px" />已付款</label>
+    <label><input type="checkbox" value="false" name="search" style="margin:6px" />尚未付款</label>
+    <br />
+    <span>@Html.TextBox("search", ViewBag.allCheck as string, new { placeholder = "請輸入關鍵字" })</span>
+
+    <input type="submit" value="查詢" />
+
+    @*資源回收桶(圖示超連結)*@
+    <a href="/Accounting/realDeleteCheck/realDeleteCheck">
+        <i class="fa fa-trash-o" style="font-size:36px; float:right; color:black; margin-right:20px"></i>
+    </a>
+</form>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().tCustomer.fCompanyName)*@
+            @Html.ActionLink("客戶名稱", "allCheckBook", new { sortOrder = ViewBag.sortCustomerName, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().tCustomer.fCompanyName)*@
+            @Html.ActionLink("訂單編號", "allCheckBook", new { sortOrder = ViewBag.sortCustomerName, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fCheckNumber)*@
+            @Html.ActionLink("付款字號", "allCheckBook", new { sortOrder = ViewBag.sortCheckNumber, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fPaymentPeriod)*@
+            @Html.ActionLink("付款期數", "allCheckBook", new { sortOrder = ViewBag.sortPaymentPeriod, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fCheckMoney)*@
+            @Html.ActionLink("支付金額", "allCheckBook", new { sortOrder = ViewBag.sortCheckMoney, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fPaymentDay)*@
+            @Html.ActionLink("支付日期", "allCheckBook", new { sortOrder = ViewBag.sortPaymentDay, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fTaxID)*@
+            @Html.ActionLink("統一編號", "allCheckBook", new { sortOrder = ViewBag.sortTaxID, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fTicktedDay)*@
+            @Html.ActionLink("兌付日期", "allCheckBook", new { sortOrder = ViewBag.sortTicktedDay, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fPaymentStatus)*@
+            @Html.ActionLink("付款狀態", "allCheckBook", new { sortOrder = ViewBag.sortPaymentStatus, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.FirstOrDefault().fPayByCash)*@
+            @Html.ActionLink("付款方式", "allCheckBook", new { sortOrder = ViewBag.sortPayByCash, currentFilter = ViewBag.allCheck })
+        </th>
+        <th>
+            編輯資料
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <button type="button" class="btn btn-link customer" data-toggle="modal" data-target="#exampleModal1" id=@item.fCustomerID>
+            @item.tCustomer.fCompanyName
+        </button>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body1" style="text-align:left;margin:15px;">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fOderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fCheckNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fPaymentPeriod)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.fCheckMoney)*@
+        @{
+            string money = (Math.Round((item.fCheckMoney), 0)).ToString("C0");
+            @money;
+        }
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.fPaymentDay.Date)*@
+        @{
+            string payDay = item.fPaymentDay.Date.ToString("yyyy/MM/dd");
+            @payDay;
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tCustomer.fTaxID)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.fTicktedDay)*@
+        @{
+            string ticketDay = item.fTicktedDay.Date.ToString("yyyy/MM/dd");
+            @ticketDay;
+        }
+    </td>
+    <td>
+        @{
+            string statusPS = "";
+
+            if (item.fPaymentStatus == true)
+            {
+                statusPS = "已付款";
+            }
+            else if (item.fPaymentStatus == false)
+            {
+                statusPS = "尚未付款";
+            }
+
+            @statusPS;
+        }
+        @*@Html.DisplayFor(modelItem => item.fPaymentStatus)*@
+    </td>
+    <td>
+        @{
+            string statusPC = "";
+
+            if (item.fPayByCash == true)
+            {
+                statusPC = "現金付款";
+            }
+            else if (item.fPayByCash == false)
+            {
+                statusPC = "支票付款";
+            }
+
+            @statusPC;
+        }
+        @*@Html.DisplayFor(modelItem => item.fPaymentStatus)*@
+    </td>
+    <td>
+        @Html.ActionLink("編輯", "editCheck", new { id = item.fID }, new { type = "button", Class = "btn btn-info" })
+        @Html.ActionLink("刪除", "deleteCheck", new { id = item.fID }, new { OnClick = "return confirm('確定要刪除嗎？')", type = "button", Class = "btn btn-danger" })
+    </td>
+</tr>
+    }
+
+</table>
+
+<div style="text-align:center">
+    @Html.PagedListPager(Model, Page => Url.Action("allCheckBook", new { Page, sortOrder = ViewBag.sortData, currentFilter = ViewBag.allCheck }))
+</div>
+
+<script src="~/js/jquery-1.12.4.js"></script>
+<script>
+    $(".btn.btn-link.customer").click(function () {
+        $.ajax({
+            url: "/Accounting/customer",
+            type: "POST",
+            data: { id: $(this).attr("id") },
+            success: function (customerData) {
+                $(".modal-body1").html("<div><p>廠商：" + customerData[0].fCompanyName + "</p><p> 聯絡人：" + customerData[0].fContactName + "</p><p> 電話：" + customerData[0].fTelephone + "</p><p>手機：" + customerData[0].fPhone + "</p><p>地址：" + customerData[0].fCity + customerData[0].fAddress + "</p></div >");
+            }
+        });
+
+    });
+</script>

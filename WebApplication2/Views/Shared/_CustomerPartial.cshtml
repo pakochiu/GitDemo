@@ -1,0 +1,5 @@
+﻿@using System.Web.Security;
+@if (User.IsInRole("Customer"))
+{
+     @Html.ActionLink("訂單管理", "DashBoard", "CustomerManagementPage")       
+}

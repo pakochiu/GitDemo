@@ -1,0 +1,115 @@
+﻿@model WebApplication2.tEmployee
+@{ 
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+    <div class="container">
+        <h4>詳細資料</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                姓名
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fName, new { @class = "form-control" })
+            </dd>
+
+            <dt>
+                生日
+            </dt>
+
+            <dd>
+                @{
+                    string birthday = "";
+                    if (Model.fBirthday != null)
+                    {
+                        birthday = Model.fBirthday.Value.ToString("yyyy/MM/dd");
+                    }
+                    else
+                    {
+                        birthday = null;
+                    }
+                }
+                @birthday
+            </dd>
+
+            <dt>
+                性別
+            </dt>
+
+            <dd>
+                @{
+                    string Gender = "";
+
+                    if (Model.fGender.ToString() == "F")
+                    {
+                        Gender = "女性";
+                    }
+                    else if (Model.fGender.ToString() == "M")
+                    {
+                        Gender = "男性";
+                    }
+                    else
+                    {
+                        Gender = "還未選擇";
+                    }
+                }
+                @Html.Label(Gender)
+            </dd>
+
+            <dt>
+                雇用日期
+            </dt>
+
+            <dd>
+                @{
+                    string Hireday = "";
+                    if (Model.fHireDate != null)
+                    {
+                        Hireday = Model.fHireDate.Value.ToString("yyyy/MM/dd");
+                    }
+                    else
+                    {
+                        Hireday = null;
+                    }
+                }
+                @Hireday
+            </dd>
+
+            <dt>
+                電話
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fPhone)
+            </dd>
+
+            <dt>
+                地址
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fAddress)
+            </dd>
+
+            <dt>
+                電子郵件
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fEmail)
+            </dd>
+
+            <dt>
+                最後更新時間
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fUpdateDate)
+            </dd>
+
+        </dl>
+        <p>
+            @Html.ActionLink("錄取", "Edit", new { id = Model.fEmployeeID }, new { @type = "button", @class = "btn btn-primary" })
+        </p>
+    </div>
+

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebApplication2.tProduct>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+
+<style>
+    .btn {
+        background-color: #19496e;
+        color: white;
+    }
+
+    .pageTitle {
+        margin: 80px auto 40px auto;
+    }
+</style>
+
+
+<h2 class="pageTitle text-center">選擇型號</h2>
+
+<div style="width:70%; margin:20px auto">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <!--=================-->
+                <!--    start form   -->
+                <!--=================-->
+                <form class="form-horizontal">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="fProductID" class="col-sm-3 text-right control-label col-form-label" style="margin-left:50px">型號</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownList("fProductID", (SelectList)ViewBag.theProductList, "請選擇", new { @name = "fProduct", @id = "fProductID", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fLenght" class="col-sm-3 text-right control-label col-form-label" style="margin-left:50px">高</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="fLenght" name="fLenght" placeholder="高度 (cm)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fWidth" class="col-sm-3 text-right control-label col-form-label" style="margin-left:50px">寬</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="fWidth" name="fWidth" placeholder="寬度 (cm)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fQuantity" class="col-sm-3 text-right control-label col-form-label" style="margin-left:50px">數量</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="fQuantity" name="fQuantity" placeholder="數量">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fGlassID" class="col-sm-3 text-right control-label col-form-label" style="margin-left:50px">玻璃型號</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownList("fGlassID", (SelectList)ViewBag.theGlassList, "請選擇", new { name = "fGlassID", id = "fGlassID", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <a onclick="AddToCart()" href="javascript:void(0);" class="btn btn-primary btn-block" role="button">加入清單</a>
+                </form>
+                <!--=================-->
+                <!--    end form     -->
+                <!--=================-->
+            </div>
+        </div>
+    </div>
+</div>

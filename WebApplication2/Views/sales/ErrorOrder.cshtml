@@ -1,0 +1,244 @@
+﻿@model IEnumerable<WebApplication2.tOrder>
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<link href="../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="../../dist/css/style.min.css" rel="stylesheet">
+@*<style>
+        .dataTables_length label {
+            color: white
+        }
+    </style>*@
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    @*<ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">library</li>
+                        </ol>*@
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">訂單記錄</h5>
+                    <div class="table-responsive">
+                        <table id="zero_config" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.ActionLink("訂單編號", "sales", new { sortOrder = ViewBag.orderidSortParm, currentFilter = ViewBag.CurrentFilter })
+                                    </th>
+                                    <th>
+                                        業務
+                                    </th>
+                                    <th>
+                                        @Html.ActionLink("訂單成立日期", "sales", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter, placeholder = "YYYY-MM-DD" })
+                                    </th>
+                                    <th>
+                                        廠商
+                                    </th>
+                                    <th>
+                                        付款狀況
+                                    </th>
+                                    <th>
+                                        鋁價
+                                    </th>
+                                    <th>
+                                        功能
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fOrderID)
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink(item.tEmployee.fName, "employee", new { id = item.fEmployeeID })*@
+                                            @*<button type="button" class="cde" id="abc">
+                                                    @item.tEmployee.fName
+                                                </button>*@
+                                            <button type="button" class="btn btn-primary emp" data-toggle="modal" data-target="#exampleModal" id=@item.fEmployeeID>
+                                                @item.tEmployee.fName
+                                            </button>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @*姓名：@item.tEmployee.fName<br />
+                                                                性別:  @item.tEmployee.fGender<br />
+                                                                電話:  @item.tEmployee.fPhone<br />*@
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.fOrderDate)*@
+                                            @{
+                                                string oddate = item.fOrderDate.Date.ToString("yyyy/MM/dd");
+                                                @oddate;
+                                            }
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary cust" data-toggle="modal" data-target="#exampleModal1" id=@item.fCustomerID>
+                                                @item.tCustomer.fCompanyName
+                                            </button>
+                                            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body1">
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("待付款", "check", new { id = item.fCustomerID })
+                                        </td>
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.fMaterialPrice)*@
+                                            @{
+                                                double MP = Convert.ToDouble(item.fMaterialPrice);
+                                                string money = (Math.Round((MP), 0)).ToString("C0");
+                                                @money;
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("編輯", "Edit", new { id = item.fOrderID }, new { Class = "btn btn-primary" })
+                                            @Html.ActionLink("訂單詳細資料", "orderDetail", new { id = item.fOrderID }, new { Class = "btn btn-success" })
+                                            @Html.ActionLink("備註", "Comment", new { id = item.fOrderID }, new { Class = "btn btn-dark" })
+                                            @Html.ActionLink("還原", "Back", new { id = item.fOrderID }, new { OnClick = "return confirm('確定要還原嗎?')", Class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                        </table>
+                    </div>
+                    <input type="button" Class="btn btn-success" value="未完成" onclick="location.href='sales'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+
+
+
+
+<script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+@*Bootstrap tether Core JavaScript
+    <script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+     slimscrollbar scrollbar JavaScript
+    <script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
+    Wave Effects
+    <script src="../../dist/js/waves.js"></script>
+    Menu sidebar
+    <script src="../../dist/js/sidebarmenu.js"></script>
+    Custom JavaScript
+    <script src="../../dist/js/custom.min.js"></script>
+     this page js
+    <script src="../../assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="../../assets/extra-libs/multicheck/jquery.multicheck.js"></script>*@
+<script src="../../assets/extra-libs/DataTables/datatables.min.js"></script>
+<script>
+    /****************************************
+     *       Basic Table                   *
+     ****************************************/
+
+    $('#zero_config').DataTable();
+
+</script>
+
+@*<script>
+        $(".dataTables_length").prepend("<span>每頁</span>")
+        $(".dataTables_length").append("<span>筆</span>")
+    </script>*@
+
+<script src="~/js/jquery-1.12.4.js"></script>
+<script>
+    $(".btn.btn-primary.emp").click(function () {
+        //console.log("aaaa")
+        $.ajax({
+            url: "/sales/emp",
+            type: "POST",
+            data: { id: $(this).attr("id") },
+            success: function (data) {
+                //console.log(data)
+                $(".modal-body").html("<div><p>姓名：" + data[0].fName + "</p><p>性別：" + data[0].fGender + "</ p ><p> 電話：" + data[0].fPhone + "</ p ></div>");
+            }
+        });
+
+    });
+
+</script>
+<script>
+    $(".btn.btn-primary.cust").click(function () {
+        //console.log("aaaa")
+        $.ajax({
+            url: "/sales/cust",
+            type: "POST",
+            data: { id: $(this).attr("id") },
+            success: function (custdata) {
+                //console.log(data)
+                $(".modal-body1").html("<div><p>廠商：" + custdata[0].fCompanyName + "</p><p> 聯絡人：" + custdata[0].fContactName + "</p><p> 電話：" + custdata[0].fTelephone + "</p><p>手機：" + custdata[0].fPhone + "</p><p>地址：" + custdata[0].fCity + custdata[0].fAddress + "</p></div >");
+            }
+        });
+
+    });
+</script>

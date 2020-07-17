@@ -1,0 +1,192 @@
+﻿@model WebApplication2.tEmployee
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<form method="post" action="EmployeesController">
+    <div class="container">
+        <h4>個人資料</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fEmployeeID)
+
+        <div class="form-group">
+            姓名
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            生日
+            <div class="col-md-10">
+                @{
+                    string Bithday = "";
+                    if (Model.fBirthday != null)
+                    {
+                        Bithday = Model.fBirthday.Value.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        Bithday = DateTime.Now.AddYears(-30).ToString("yyyy-MM-dd");
+                    }
+                }
+                @Html.TextBoxFor(model => model.fBirthday, new { @type = "date", @class = "form-control datepicker", @Value = Bithday, @readonly = "true" })
+                @Html.ValidationMessageFor(model => model.fBirthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            性別
+            <div class="col-md-10">
+                @{
+                    string Gender = "";
+
+                    if (Model.fGender.ToString() == "F")
+                    {
+                        Gender = "女性";
+                    }
+                    else if (Model.fGender.ToString() == "M")
+                    {
+                        Gender = "男性";
+                    }
+                    else
+                    {
+                        Gender = "還未選擇";
+                    }
+                }
+                @Html.Label(Gender, new { @class = "control-label col-md-2" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            雇用日期
+            <div class="col-md-10">
+                @{
+                    string Hireday = "";
+                    if (Model.fHireDate != null)
+                    {
+                        Hireday = Model.fHireDate.Value.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        Hireday = null;
+                    }
+                }
+                @Html.TextBoxFor(model => model.fHireDate, new { @type = "date", @class = "form-control datepicker", @Value = Hireday, @readonly = "true" })
+                @Html.ValidationMessageFor(model => model.fHireDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            手機
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            地址
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           電子郵件
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            帳號
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fUserName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                @Html.ValidationMessageFor(model => model.fUserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" /><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">修改密碼</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class=" modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @*彈出視窗的內文*@
+                    <div class="form-group">
+                        @Html.Label("請輸入新密碼", htmlAttributes: new { @class = "control-label col-md-2", For = "password1" })
+                        <div class="col-xl-10">
+                            @Html.Editor("PassWord", new { htmlAttributes = new { @class = "required form-control", type = "password", placeholder = "Password", onblue = "checkpas1();" } })
+                            @Html.ValidationMessageFor(model => model.fLoginPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("再一次輸入密碼", htmlAttributes: new { @class = "control-label col-md-2", For = "password1" })
+                        <div class="col-xl-10">
+                            @Html.Editor("confirm", new { htmlAttributes = new { @class = "required form-control", type = "password", placeholder = "Password", onblue = "checkpas();" } })
+                            @Html.ValidationMessageFor(model => model.fLoginPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="checkpas2()">SaveChanger</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>*@
+<script>
+    $(".tip").hide();
+    function checkpas1() {//當第一個密碼框失去焦點時，觸發checkpas1事件
+        var pas1 = document.getElementById("PassWord").value;
+        var pas2 = document.getElementById("confirm").value;//獲取兩個密碼框的值
+        if (pas1 != pas2 && pas2 != "")//此事件當兩個密碼不相等且第二個密碼是空的時候會顯示錯誤資訊
+            $(".tip").show();
+        else
+            $(".tip").hide();//若兩次輸入的密碼相等且都不為空時，不顯示錯誤資訊。
+    }
+    function checkpas() {//當第一個密碼框失去焦點時，觸發checkpas2件
+        var pas1 = document.getElementById("PassWord").value;
+        var pas2 = document.getElementById("confirm").value;//獲取兩個密碼框的值
+        if (pas1 != pas2) {
+            $(".tip").show();//當兩個密碼不相等時則顯示錯誤資訊
+
+        } else {
+            $(".tip").hide();
+        }
+    }
+    function checkpas2() {//點選提交按鈕時，觸發checkpas2事件，會進行彈框提醒以防無視錯誤資訊提交
+        var pas3 = document.getElementById("PassWord").value;
+        var pas4 = document.getElementById("confirm").value;
+        var all_Inputs = $("input[type=password]")
+        if (pas3 != pas4) {
+            all_Inputs.val("");
+            alert("兩次輸入的密碼不一致！請重新確認");
+            return false;
+        }
+    }
+
+</script>
+

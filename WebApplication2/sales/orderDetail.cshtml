@@ -1,0 +1,77 @@
+﻿@model WebApplication2.tOrderDetail
+
+@{
+    ViewBag.Title = "orderDetail";
+}
+
+<h2>orderDetail</h2>
+
+<div>
+    <h4>tOrderDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tOrders.fOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tOrders.fOrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fProductID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fProductID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fLenght)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fLenght)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fWidth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fWidth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fGlassID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fGlassID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fSubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fSubTotal)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.fID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

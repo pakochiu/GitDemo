@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication2.tOrderComment>
+
+@{
+    ViewBag.Title = "Comment";
+}
+
+<h2>Comment</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NewComment")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tOrders.fOrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fComment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fUpdateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tEmployee.fName)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tOrders.fOrderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fCustomerID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fComment)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fUpdateDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tEmployee.fName)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.fID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.fID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.fID })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,108 @@
+﻿@model WebApplication2.tEmployee
+
+@{
+    ViewBag.Title = "employee";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+}
+
+<h2>employee</h2>
+
+<div>
+    <h4>tEmployee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fName)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.fBirthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fBirthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fHireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fHireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fUpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fUpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tDepartment.fDepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tDepartment.fDepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tJobTitle.fTitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tJobTitle.fTitleName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.fEmployeeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

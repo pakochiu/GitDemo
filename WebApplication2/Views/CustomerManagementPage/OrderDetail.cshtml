@@ -1,0 +1,172 @@
+﻿@model  WebApplication2.ViewModel.TestOrderAndDetail
+
+
+@*@model  IEnumerable<WebApplication2.ViewModel.TestOrderAndDetail>*@
+
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+}
+@if (User.IsInRole("Customer"))
+{
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                @*<h4 class="page-title"></h4>*@
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        @*<ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            </ol>*@
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body printableArea">
+                    <h3><b>訂單編號: </b> </h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-left">
+                                <address>
+                                    <h3> &nbsp;<b class="text-danger">Material Pro Admin</b></h3>
+                                    <p class="text-muted m-l-5">
+                                        E 104, Dharti-2,
+                                        <br /> Nr' Viswakarma Temple,
+                                        <br /> Talaja Road,
+                                        <br /> Bhavnagar - 364002
+                                    </p>
+                                </address>
+                            </div>
+                            <div class="pull-right text-right">
+                                <address>
+                                    <h3>To,</h3>
+                                    <h4 class="font-bold">Gaala & Sons,</h4>
+                                    <p class="text-muted m-l-30">
+                                        E 104, Dharti-2,
+                                        <br /> Nr' Viswakarma Temple,
+                                        <br /> Talaja Road,
+                                        <br /> Bhavnagar - 364002
+                                    </p>
+                                    <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 23rd Jan 2018</p>
+                                    <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2018</p>
+                                </address>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive m-t-40" style="clear: both;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                窗戶型號
+                                            </th>
+                                            <th class="text-right">
+                                                寬度
+                                            </th>
+                                            <th class="text-right">
+                                                長度
+                                            </th>
+                                            <th class="text-right">
+                                                數量
+                                            </th>
+                                            <th class="text-right">
+                                                玻璃名稱
+                                            </th>
+                                            <th class="text-right">
+                                                小計
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.GetOrderDetail) //正在解
+                                        {
+
+                                            <tr>
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(modelItem => item.tProduct.fGroup)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.fWidth)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.fLenght)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.fQuantity)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.tGlass.fGlassName)
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.fSubTotal)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pull-right m-t-30 text-right">
+                                <p>Sub - Total amount: $13,848</p>
+                                <p>vat (10%) : $138 </p>
+                                <hr>
+                                <h3><b>Total :</b> $13,986</h3>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr>
+                            <div class="text-right">
+                                <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+}
+else
+{
+    @Html.Partial("_unauthorizedPartial")
+}

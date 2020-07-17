@@ -1,0 +1,146 @@
+﻿@model WebApplication2.tCustomer
+
+@{
+    ViewBag.Title = "Registeration";
+}
+<link href="~/Content/LoginPage.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Microsoft JhengHei'
+    }
+
+    .login-form .group .input {
+        width: 100%;
+        color: #fff;
+        display: block;
+    }
+
+    .login-form .group .input {
+        margin: auto;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        background: rgba(255,255,255,.1);
+    }
+
+    .login-html {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 90px 70px 50px 70px;
+        background: #1d7da3;
+        margin-top: 20px;
+    }
+
+    .login-form .group .LLlabel {
+        color: aliceblue;
+        font-size: 12px;
+    }
+
+    .regisdata {
+        background: #fce514;
+        border: 1px solid white;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+        .regisdata:hover {
+            background: #00ff21;
+            color: black;
+            border: 1px solid white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+</style>
+<div class="Detail">
+    <div class="login-wrap" style="min-height: 750px;">
+        <div class="login-html" style="padding: 20px 70px 50px 70px; ">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">公司資訊</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"> </label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="group">
+
+                            @Html.Label("公司名稱", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fCompanyName, new { htmlAttributes = new { @class = "input ccompany" } })
+                            @Html.ValidationMessageFor(model => model.fCompanyName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("統編", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fTaxID, new { htmlAttributes = new { @class = "input ctaxid" } })
+                            @Html.ValidationMessageFor(model => model.fTaxID, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("聯絡人", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fContactName, new { htmlAttributes = new { @class = "input ccontactperson" } })
+                            @Html.ValidationMessageFor(model => model.fContactName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("公司電話", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fTelephone, new { htmlAttributes = new { @class = "input cphone" } })
+                            @Html.ValidationMessageFor(model => model.fTelephone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("手機號碼", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fPhone, new { htmlAttributes = new { @class = "input cmobile" } })
+                            @Html.ValidationMessageFor(model => model.fPhone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("傳真號碼", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fFox, new { htmlAttributes = new { @class = "input cfax" } })
+                            @Html.ValidationMessageFor(model => model.fFox, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.Label("公司地址", htmlAttributes: new { @class = "LLlabel" })
+                            @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "input caddr" } })
+                            @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+                        </div>
+
+                        @*<div class="group">
+                                @Html.LabelFor(model => model.fCity, htmlAttributes: new { @class = "LLlabel" })
+                                @Html.EditorFor(model => model.fCity, new { htmlAttributes = new { @class = "input" } })
+                                @Html.ValidationMessageFor(model => model.fCity, "", new { @class = "text-danger" })
+                            </div>*@
+
+                        <div class="group">
+                            <input type="submit" value="建立公司資訊" class="button" />
+                        </div>
+                    }
+
+                    <button class="regisdata">自動填滿</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(".regisdata").click(function () {
+        $(".ccompany").val("張學友限公司")
+        $(".ctaxid").val("1827635")
+        $(".ccontactperson").val("王顓頊")
+        $(".cphone").val("0218743712")
+        $(".cmobile").val("0918777123")
+        $(".cfax").val("03187543123")
+        $(".caddr").val("台北市忠考西路666號18樓")
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

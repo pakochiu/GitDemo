@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebApplication2.tOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDeliverDate1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGetMoneyBack1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDeliverDate2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGetMoneyBack2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDeliverDate3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGetMoneyBack3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDeliverDate4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGetMoneyBack4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fMaterialPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDoorFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fScreenFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fInstallationFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fGlassFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fWaterwayFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCrackFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderConfirm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tCustomer.fUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tEmployee.fName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDeliverDate1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGetMoneyBack1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDeliverDate2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGetMoneyBack2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDeliverDate3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGetMoneyBack3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDeliverDate4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGetMoneyBack4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fMaterialPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDoorFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fScreenFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fInstallationFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fGlassFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fWaterwayFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCrackFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderConfirm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tCustomer.fUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tEmployee.fName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.fOrderID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.fOrderID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.fOrderID })
+            </td>
+        </tr>
+
+    }
+
+</table>

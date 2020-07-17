@@ -1,0 +1,103 @@
+﻿@{
+    //取得當前的購物車全部的內容
+    var currentCart = WebApplication2.Models.Cart.operation.GetCurrentCart();
+}
+
+<a id="CartDropDown" class="dropdown-toggle" data-toggle="dropdown" style="background-color:#19496E">
+    @string.Format($"共 {currentCart.Count} 項")
+    <span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu" role="menu" aria-labelledby="CartDropDown">
+    @if (currentCart.Count > 0)
+    {
+        foreach (var item in currentCart)
+        {
+            //依序輸出購物車裡面的品項
+            <li>
+                <a href="#">
+                    @{ 
+                        //顯示玻璃名稱
+                        string GLName = WebApplication2.Controllers.GlassInfoController.getTheGlassName(item.fGlassID);
+                    }
+
+                    <span type="button" class="btn btn-default btn-sm" onclick="RemoveFromCart('@item.fProductID','@item.fLenght.ToString("0.00")','@item.fWidth.ToString("0.00")')">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </span>
+                    <strong>@item.fProductID | </strong>@item.fLenght cm x @item.fWidth cm   @GLName    x @item.fQuantity
+                </a>
+            </li>
+        }
+        <li class="divider"></li>
+        <li>
+            <div id="CartButtons" class="col-xs-12">
+                <a class="btn btn-info text-center btn-block" href="@Url.Action("Index","Order")">報價</a>
+                <a class="btn btn-danger text-center btn-block" onclick="ClearCart()">清空</a>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li><a class="btn btn-default text-center" href="#">無任何品項</a></li>
+    }
+</ul>
+
+
+<script type="text/javascript">
+    //加入編號為 productID 的產品進購物車
+    function AddToCart() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AddToCart","Cart")',
+            data: {
+                fProductID: $("#fProductID").val(),
+                fLenght: $("#fLenght").val(),
+                fWidth: $("#fWidth").val(),
+                fQuantity: $("#fQuantity").val(),
+                fGlassID: $("#fGlassID").val()
+            }
+        })
+            .done(function (msg) {
+                //將回傳的資料年入購物車 li#Cart
+                $('li#Cart').html(msg);
+                alert('新增成功');
+            });
+    }
+
+    //從購物車中 刪除一筆資料
+    function RemoveFromCart(ID,H,W) {
+
+        console.log('remove');
+        console.log(ID);
+        console.log(H);
+        console.log(W);
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RemoveFromCart", "Cart")',
+            data: {
+                fProductID: ID,
+                fLenght: H,
+                fWidth:W
+            }
+        }).done(function (msg) {
+            //將回傳的資料填入購物車
+            $('li#Cart').html(msg);
+        })
+    }
+
+    //清空購物車內所有商品
+    function ClearCart() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ClearCart", "Cart")',
+            data: {}
+        })
+            .done(function (msg) {
+                $('li#Cart').html(msg);
+            });
+    }
+</script>
+
+
+

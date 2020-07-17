@@ -1,0 +1,131 @@
+﻿@model IEnumerable<WebApplication2.tEmployee>
+@{
+    int count = 0;
+
+    ViewBag.Title = "應徵資料";
+    Layout = "~/Views/Shared/_LayoutPageEmployment.cshtml";
+
+}
+
+
+
+<head>
+</head>
+<h2 style="text-align:center">應徵資料</h2>
+<p>
+    @Html.ActionLink("新增人員", "Create","",new { @class= "btn btn-primary" })
+</p>
+<table id="zero_config" class="table table-hover table-striped display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                編號
+            </th>
+            <th scope="col">
+                姓名
+            </th>
+            <th scope="col">
+                生日
+            </th>
+            <th scope="col">
+                性別
+            </th>
+            <th scope="col">
+                所在部門
+            </th>
+            <th scope="col">
+                目前職位
+            </th>
+            <th scope="col">
+                雇用日期
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    @{
+                        string birthday = "";
+                        if (item.fBirthday != null)
+                        {
+                            birthday = item.fBirthday.Value.ToString("yyyy/MM/dd");
+                        }
+                        else
+                        {
+                            birthday = null;
+                        }
+                    }
+                    @birthday
+
+                </td>
+                <td>
+                    @{
+                        string Gender = "";
+
+                        if (item.fGender == null)
+                        {
+                            Gender = "未選擇";
+                        }
+                        else if (item.fGender.ToString() == "M")
+                        {
+                            Gender = "男性";
+                        }
+                        else
+                        {
+                            Gender = "女性";
+                        }
+                    }
+                    @Html.Label(Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tDepartment.fDepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tJobTitle.fTitleName)
+                </td>
+                <td>
+                    @{
+                        string Hireday = "";
+                        if (item.fHireDate != null)
+                        {
+                            Hireday = item.fHireDate.Value.ToString("yyyy/MM/dd");
+                        }
+                        else
+                        {
+                            Hireday = null;
+                        }
+                    }
+                    @Hireday
+                </td>
+                <td>
+                    @Html.ActionLink("錄取", "Edit", new { id = item.fEmployeeID }, new { Class = "btn btn-success" })
+                    @Html.ActionLink("詳細", "Details", new { id = item.fEmployeeID }, new { Class = "btn btn-info" })
+                    @Html.ActionLink("不錄取", "Delete", new { id = item.fEmployeeID }, new { OnClick = "return confirm('確認是否不錄取')", Class = "btn btn-danger" })
+                </td>
+            </tr>
+                        }
+    </tbody>
+ 
+</table>
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>*@
+<script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../../assets/extra-libs/DataTables/datatables.min.js"></script>
+<script>
+    //$('#zero_config').DataTable();
+    $('#zero_config').DataTable();
+</script>
+                 
+

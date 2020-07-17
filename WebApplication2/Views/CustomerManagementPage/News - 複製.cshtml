@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebApplication2.tNew>
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+}
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    @*<ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">library</li>
+                        </ol>*@
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="card" >
+        <div class="card-body">
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-hover">
+                <div class="box bg-cyan text-center">
+                    <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                    <h6 class="text-white">儀表板</h6>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3" >
+            <div class="card card-hover" >
+                <div class="box bg-success text-center" >
+                    <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                    <h6 class="text-white">工程進度</h6>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-hover">
+                <div class="box bg-warning text-center">
+                    <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                    <h6 class="text-white">訂單資訊</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card"  style="float:left">
+        <div class="card-body">
+        </div>
+        <img src="~/Image/Logo/News.jpg" style="width:300px; height:300px" />
+    </div>
+
+    <!-- card new -->
+
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title m-b-0">最近消息</h4>
+        </div>
+        <ul class="list-style-none">
+            @foreach (var item in Model)
+            {
+                <li class="d-flex no-block card-body">
+                    <i class="fa fa-check-circle w-30px m-t-5"></i>
+                    <div>
+                        <a href="#" class="m-b-0 font-medium p-0"> @Html.DisplayFor(modelItem => item.fSubject)</a>
+                        <span class="text-muted"> @Html.DisplayFor(modelItem => item.fContent)</span>
+                    </div>
+                    <div class="ml-auto">
+                        <div class="tetx-right">
+                            <h5 class="text-muted m-b-0">20</h5>
+                            <span class="text-muted font-16">@Html.DisplayFor(modelItem => item.fData)</span>
+                        </div>
+                    </div>
+                </li>
+
+            }
+        </ul>
+    </div>
+
+</div>

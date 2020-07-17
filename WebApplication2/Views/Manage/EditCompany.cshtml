@@ -1,0 +1,134 @@
+﻿@model WebApplication2.tCustomer
+
+@{
+    ViewBag.Title = "EditCompany";
+}
+
+<link href="~/Scripts/LoginPage.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Microsoft JhengHei';
+    }
+
+    .login-form .group .input {
+        width: 100%;
+        color: #fff;
+        display: block;
+    }
+
+    .login-form .group .input {
+        margin: auto;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        background: rgba(255,255,255,.1);
+    }
+    #abc{
+        color:lightslategray
+    }
+
+    .login-html {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 90px 70px 50px 70px;
+        background: #1d7da3;
+        margin-top: 20px;
+    }
+    .login-form .group .LLlabel {
+        color: aliceblue;
+        font-size: 12px;
+    }
+
+    a {
+        color: darkgray;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: yellow;
+        text-decoration: none;
+    }
+</style>
+<div class="Detail">
+    <div class="login-wrap" style="min-height: 750px;">
+        <div class="login-html" style="padding: 20px 70px 50px 70px; ">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">帳戶管理</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"> </label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    @using (Html.BeginForm("EditCompany", "Manage",FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.fCustomerID)
+
+                        <div class="group">
+                            <label class = "LLlabel" >公司名稱</label>
+                            @Html.EditorFor(model => model.fCompanyName, new { htmlAttributes = new { @class = "input", @readonly = "readonly", id="abc"  }})
+                            @Html.ValidationMessageFor(model => model.fCompanyName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">統一編號</label>
+                            @Html.EditorFor(model => model.fTaxID, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fTaxID, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">聯絡人</label>
+                            @Html.EditorFor(model => model.fContactName, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fContactName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">公司電話</label>
+                            @Html.EditorFor(model => model.fTelephone, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fTelephone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">手機號碼</label>
+                            @Html.EditorFor(model => model.fPhone, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fPhone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">傳真</label>
+                            @Html.EditorFor(model => model.fFox, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fFox, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            <label class="LLlabel">地址</label>
+                            @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+                        </div>
+
+                        @*<div class="group">
+                            <label class="LLlabel">城市</label>
+                            @Html.EditorFor(model => model.fCity, new { htmlAttributes = new { @class = "input" } })
+                            @Html.ValidationMessageFor(model => model.fCity, "", new { @class = "text-danger" })
+                        </div>*@
+
+                        <div class="group">
+                            <input type="submit" value="修改資訊" class="button" sstyle="border-width: 0px;" />
+                        </div>
+                    </div>
+                    }
+
+                    <div>
+                        @Html.ActionLink("上一頁", "Index")
+                    </div>
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

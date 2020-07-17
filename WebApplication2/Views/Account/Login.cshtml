@@ -1,0 +1,209 @@
+﻿@using WebApplication2.Models
+@using Microsoft.Owin.Security
+@model LoginViewModel
+@{
+    ViewBag.Title = "帳戶登入";
+}
+
+
+<link href="~/Content/LoginPage.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Microsoft JhengHei';
+    }
+
+    #Facebook {
+        background: #3C5A99;
+        color: aliceblue;
+    }
+
+    #Google {
+        background: #EC5445;
+        color: aliceblue;
+    }
+
+    #forgotPw:hover {
+        text-decoration: none;
+        color: gold
+    }
+
+    .fastlogin {
+        background: #08c5ff;
+        color: aliceblue;
+        border: 3px, solid, red;
+        border-radius: 5px;
+        font-size: 25px;
+    }
+
+        .fastlogin:hover {
+            border: 3px, solid, red;
+            text-decoration: none;
+        }
+
+    .login-html {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 90px 70px 50px 70px;
+        background: #1d7da3;
+    }
+
+    .login-form .group .LLlabel {
+        color: aliceblue;
+        font-size: 12px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+        color: aliceblue;
+        font-size: 14px;
+    }
+
+    a {
+        text-decoration: none;
+        color: aliceblue;
+    }
+    .regisdata {
+        background: #fce514;
+        border: 1px solid white;
+        padding: 8px;
+        border-radius: 10px;
+        margin-top: 6px;
+        margin-bottom: 3px;
+    }
+
+        .regisdata:hover {
+            background: #00ff21;
+            color: black;
+            border: 1px solid white;
+            padding: 8px;
+            border-radius: 10px;
+            margin-top: 6px;
+            margin-bottom: 3px;
+        }
+
+    .login-wrap {
+        width: 100%;
+        margin: auto;
+        max-width: 525px;
+        min-height: 700px;
+        position: relative;
+        box-shadow: 0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19);
+    }
+
+    .foot-lnk {
+        text-align: center;
+        margin: 8px;
+    }
+</style>
+
+<div class="Detail">
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登入</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"> </label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr />
+
+                        <div class="group">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.LabelFor(m => m.Email, new { @class = "LLlabel" })
+
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input inputEmail" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="group">
+                            @Html.LabelFor(m => m.Password, new { @class = "LLlabel" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "input inputPassword" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="group">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe, new { Class = "icon", Style = "font-size:14" })
+                        </div>
+
+                        <div class="group">
+                            <input type="submit" value="登入" class="button" />
+                        </div>
+                    }
+                    <div class="hr" style="margin-bottom: 30px"></div>
+                    <span style="margin-bottom:10px; padding-bottom:10px; color:aliceblue">使用其他方式登入</span>
+                    @{
+                        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                        if (loginProviders.Count() == 0)
+                        {
+                            <div>
+                                <p>
+                                    目前無此選項!
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("ExternalLogin", "Account"))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    <p>
+                                        @foreach (AuthenticationDescription p in loginProviders)
+                                        {
+                                            <button style="margin-top: 10px; font-weight:bold" type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用你的 @p.Caption 帳戶登入">@p.AuthenticationType</button>
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        }
+                    }
+                    <button class="regisdata regisdata1">劉德華</button>
+                    <button class="regisdata regisdata2">陳奕迅</button>
+                    <button class="regisdata regisdata3">周星馳</button>
+                    <button class="regisdata regisdata4">王顓瑞</button>
+                    <div class="foot-lnk">
+                        @Html.ActionLink("忘記密碼?", "ForgotPassword", "Account", new { @id = "forgotPw" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(".regisdata1").click(function () {
+        $(".inputEmail").val("pakochiu@gmail.com")
+        $(".inputPassword").val("abcABC123!")
+    })
+
+    $(".regisdata2").click(function () {
+        $(".inputEmail").val("pako@gmail.com")
+        $(".inputPassword").val("abcABC123!")
+    })
+
+    $(".regisdata3").click(function () {
+        $(".inputEmail").val("chow@gmail.com")
+        $(".inputPassword").val("abcABC123!")
+    })
+
+    $(".regisdata4").click(function () {
+        $(".inputEmail").val("iamcustomer@gmail.com")
+        $(".inputPassword").val("abcABC123!")
+    })
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

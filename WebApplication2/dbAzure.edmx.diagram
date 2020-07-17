@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f617a687e70a4603a60c602253c16996" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.C__MigrationHistory" Width="1.5" PointX="19" PointY="10.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.AspNetRole" Width="1.5" PointX="17.125" PointY="6.25" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.AspNetUserClaim" Width="1.5" PointX="21.625" PointY="7.25" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.AspNetUserLogin" Width="1.5" PointX="21.625" PointY="4.75" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.AspNetUser" Width="1.5" PointX="19.375" PointY="5.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.sysdiagram" Width="1.5" PointX="21" PointY="10.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tAluminumMaterialList" Width="1.5" PointX="16.5" PointY="10.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tCase" Width="1.5" PointX="6.5" PointY="12.625" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tCheck" Width="1.5" PointX="7.875" PointY="7.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tCustomer" Width="1.5" PointX="5.5" PointY="7.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tDate" Width="1.5" PointX="1" PointY="0.75" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tDepartment" Width="1.5" PointX="1" PointY="8.5" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tEmployee" Width="1.5" PointX="3.25" PointY="5.75" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tFaceDetection" Width="1.5" PointX="3.25" PointY="3.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tGlass" Width="1.5" PointX="14.5" PointY="5.5" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tJobTitle" Width="1.5" PointX="1" PointY="6.375" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tNew" Width="1.5" PointX="4.75" PointY="12.625" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tOrderComment" Width="1.5" PointX="5.5" PointY="3.875" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tOrderDetail" Width="1.5" PointX="12.625" PointY="5.5" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tOrder" Width="1.5" PointX="10.125" PointY="5.5" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tProduct" Width="1.5" PointX="12.625" PointY="10.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tProductList" Width="1.5" PointX="14.625" PointY="10.125" />
+        <EntityTypeShape EntityType="dbMSIT126TeamModel.tWorkingTime" Width="1.5" PointX="1" PointY="3.375" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tProductList_tAluminumMaterialList" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tCase_tCustomers" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tCheck_tCustomers" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tCheck_tOrders" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tCustomers_tEmployee1" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tNews_tCustomers" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tOrders_tCustomers" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tDate_tDate" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tWorkingTime_tDate" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tEmployee_tDepartment" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tEmployee_tJobTitle" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tFaceDetection_tEmployee" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tOrderComment_tEmployee" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tOrders_tEmployee" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tWorkingTime_tFaceDetection" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_GlassID" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tOrderComment_tOrders" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_OrdersID" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_ProductID" />
+        <AssociationConnector Association="dbMSIT126TeamModel.FK_tProductList_tProduct" />
+        <AssociationConnector Association="dbMSIT126TeamModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

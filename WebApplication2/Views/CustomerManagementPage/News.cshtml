@@ -1,0 +1,228 @@
+﻿@model IEnumerable<WebApplication2.tNew>
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+}
+@if (User.IsInRole("Customer"))
+{
+    <style>
+        .page-link {
+            color: #fc9d03;
+            font-weight: bold
+        }
+
+            .page-link:hover {
+                color: #03fcf8
+            }
+    </style>
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+
+
+
+        <!-- card new -->
+        <div class="card">
+            <!-- Nav tabs -->
+            @*<ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">工程進度消息</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Tab2</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Tab3</span></a> </li>
+            </ul>*@
+            <!-- Tab panes -->
+            <div class="tab-content tabcontent-border">
+                <div class="tab-pane active" id="home" role="tabpanel">
+                    <div class="p-20">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title m-b-0">工程進度消息</h4>
+                            </div>
+                            <div class="testNews">
+                                <ul class="list-style-none">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="PageID">
+                            <li class="page-item"><a class="page-link" href="#" id="prevPage" style="border-radius: 25px; margin-left: 10px; margin-right: 10px">上一頁</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="tab-pane  p-20" id="profile" role="tabpanel">
+                    <div class="p-20">
+                        <img src="../../assets/images/background/img4.jpg" class="img-fluid">
+                        <p class="m-t-10">And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment..</p>
+                    </div>
+                </div>
+                <div class="tab-pane p-20" id="messages" role="tabpanel">
+                    <div class="p-20">
+                        <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment..</p>
+                        <img src="../../assets/images/background/img4.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="testupdate">
+
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+
+        var js;
+
+        $(document).ready(function () {
+            console.log("inside");
+            $.ajax({
+                url: "NewsUpdate",
+                type: "POST",
+                success: function (data) {
+                    js = JSON.parse(data)
+
+
+                    //----------------------------------以下寫分頁頁數-------------------------------------
+                    let page = Math.ceil(js.length / 5);
+                    let volunm = 5;
+                    let nowPage = 1;
+                    if (js.length <= 5) {
+                        for (var i = 0; i < js.length; i++) {
+                            $(".Newsupdate").append("<p>" + js[i].fSubject + "</p>")
+                        }
+
+                    }
+                    for (var i = 1; i < page + 1; i++) {
+                        //console.log(i);
+                        $("#PageID").append("<li class = \"page-item\"><a onMouseOver=\"this.style.color = '#03fcf8'\" onMouseOut=\"this.style.color = '#fc9d03'\" style=\"color:#fc9d03; border-radius: 50%; margin:1px \" class = \"page-link\" href=\"#\" id=\"" + i + "\">" + i + "</a></li>");
+                        if (i == page) {
+                            $("#PageID").append("<li class = \"page-item\"><a class = \"page-link\" href=\"#\" id = \"nextPage\" style=\"border-radius: 15px; margin-left: 10px; margin-right: 10px\">下一頁</a></li>");
+                        }
+                    }
+                    //---------------完-----------以上寫分頁頁數----------------------------------------------------------------------------
+
+                    //-------------------以下寫第一頁新文內容-----------------
+                    for (var i = 0; i < volunm; i++) {
+                        $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\" placeholder = \"YYYY-MM-DD\">" + js[i].fData + "</span></div></div>")
+                        nowPage = 1;
+                    }
+
+                    //-------------------完----- 寫第一頁新文內容-----------------
+
+
+                    //------------------------ 寫其他頁新文內容------------------------
+                    $(".page-link").click(function () {
+                        console.log("inside Click")
+                        var id = $(this).attr("id");
+                        console.log(id)
+                        //$(".p-item").remove();
+
+                        $(".list-style-none").remove();
+
+                        $("#removeItem").remove();
+
+                        if (id == 1) {
+                            $(".testNews").append("<ul class=\"list-style-none\">")
+                            for (var i = 0; i < volunm; i++) {
+                                $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+
+                            }
+                            $(".testNews").append("</ul>")
+                            nowPage = 1;
+                        }
+                        else if (id == Math.ceil(js.length / 5)) {
+                            console.log(volunm * id - (5 - js.length));
+                            $(".testNews").append("<ul class=\"list-style-none\">")
+                            for (var i = (id * volunm) - 5; i < js.length; i++) {
+                                $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+
+                            }
+                            $(".testNews").append("</ul>")
+                            nowPage = Math.ceil(js.length / 5);
+                        }
+                        else if (id == "nextPage") {
+                            if (nowPage == (Math.ceil(js.length / 5) - 1)) {
+
+                                $(".testNews").append("<ul class=\"list-style-none\">")
+                                for (var i = (Math.ceil(js.length / 5) * volunm) - 5; i < js.length; i++) {
+                                    $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+
+                                }
+                                $(".testNews").append("</ul>")
+                                nowPage = Math.ceil(js.length / 5);
+                            }
+                            else if (nowPage != Math.ceil(js.length / 5)) {
+                                $(".testNews").append("<ul class=\"list-style-none\">")
+                                for (var x = ((parseInt(nowPage) + 1) * volunm) - 5; x < volunm * (parseInt(nowPage) + 1); x++) {
+                                    $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[x].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[x].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[x].fData + "</span></div></div>")
+                                }
+                                $(".testNews").append("</ul>")
+                                nowPage = (parseInt(nowPage) + 1);
+                            }
+                            else {
+                                $(".testNews").append("<ul class=\"list-style-none\">")
+                                for (var i = (Math.ceil(js.length / 5) * volunm) - 5; i < js.length; i++) {
+                                    //$(".Newsupdate").append("<p class = \"p-item\">" + js[i].fSubject + "</p><p class = \"p-item\">" + js[i].fContent + "</p>")
+                                    //$(".list-style-none").append("<li class=\"d-flex no-block card-body\"><i class=\"fa fa-check-circle w-30px m-t-5\"></i><div><a href=\"#\" class=\"m-b-0 font-medium p-0\"><p class = \"p-item\">" + js[i].fSubject + "</p></a><span class=\"text-muted\">" + js[i].fContent + "</span></div><div class=\"ml-auto\"><div class=\"tetx-right\"><h5 class=\"text-muted m-b-0\">20</h5><span class=\"text-muted font-16\">" + js[i].fData + "</span></div></div>")
+                                    $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+
+                                }
+                                $(".testNews").append("</ul>")
+                                nowPage = Math.ceil(js.length / 5);
+                                //nowPage = (nowPage + 1);
+                            }
+
+                        }
+                        else if (id == "prevPage") {
+                            if (nowPage == 1) {
+                                $(".testNews").append("<ul class=\"list-style-none\">")
+                                for (var i = 0; i < volunm; i++) {
+                                    $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+                                }
+                                $(".testNews").append("</ul>")
+                                nowPage = 1;
+                            }
+                            else {
+                                $(".testNews").append("<ul class=\"list-style-none\">")
+                                for (var i = ((nowPage - 1) * volunm) - 5; i < volunm * (nowPage - 1); i++) {
+                                    $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+                                }
+                                $(".testNews").append("</ul>")
+                                nowPage = (nowPage - 1);
+
+                            }
+                        }
+                        else {
+                            $(".testNews").append("<ul class=\"list-style-none\">")
+                            for (var i = (id * volunm) - 5; i < volunm * id; i++) {
+                                $(".list-style-none").append("<li class=\"d-flex no-block card-body\" id=\"removeItem\"><i class=\"fa fa-check-circle w-30px m-t-5\" id=\"removeItem\"></i><div id=\"removeItem\"><a href=\"#\" class=\"m-b-0 font-medium p-0\" id=\"removeItem\"><p class = \"p-item\" id=\"removeItem\">" + js[i].fSubject + "</p></a><span class=\"text-muted\" id=\"removeItem\">" + js[i].fContent + "</span></div><div class=\"ml-auto\" id=\"removeItem\"><div class=\"tetx-right\" id=\"removeItem\"><h5 class=\"text-muted m-b-0\" id=\"removeItem\"></h5><span class=\"text-muted font-16\" id=\"removeItem\">" + js[i].fData + "</span></div></div>")
+                            }
+                            nowPage = $(this).attr("id");
+                            $(".testNews").append("</ul>")
+                            nowPage = id;
+                        }
+
+                    })
+                }
+            })
+        })
+    </script>
+}
+else
+{
+    @Html.Partial("_unauthorizedPartial")
+}

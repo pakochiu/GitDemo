@@ -1,0 +1,743 @@
+﻿@model WebApplication2.ViewModel.TestCustomerViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageTest.cshtml";
+    var customer = User.Identity.GetUserName();
+    dbMSIT126TeamEntities db = new dbMSIT126TeamEntities();
+
+    var q = (from p in db.tOrders
+             where p.tCustomer.fUserName == customer
+             select p).ToList();
+}
+
+@if (User.IsInRole("Customer"))
+{
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei'
+        }
+    </style>
+
+
+
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <div class="ml-auto text-right">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-hover">
+                    <div class="box bg-cyan text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                        <h6 class="text-white">儀表板</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-hover">
+                    <div class="box bg-success text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                        <h6 class="text-white">工程進度</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-hover">
+                    <div class="box bg-warning text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                        <h6 class="text-white">訂單資訊</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                        <h6 class="text-white">聯繫業務</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">訂單發票</h4>
+                    </div>
+
+
+                    <div class="comment-widgets scrollable">
+                        @{
+                            if (q.Count() > 0)
+                            {
+                                for (int i = 0; i < 1; i++)
+                                {
+                                    int countTime = 0;
+
+                                    <div class="d-flex flex-row comment-row m-t-0">
+                                        <div class="p-2"><img src="~/Image/Logo/chow.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                        <div class="comment-text w-100">
+                                            <h6 class="font-medium">訂單編號:  @q[i].fOrderID </h6>
+                                            <span class="m-b-15 d-block"> 點選下方可對應至的訂單明細喔 </span>
+                                            <div class="comment-footer" id="tcom">
+                                                <span class="text-muted float-right"> @q[i].fOrderDate.ToString("dd-MM-yyyy")  </span>
+
+                                                @{
+                                                    if (q[i].fGetMoneyBack1 != null)
+                                                    {
+                                                        countTime += 1;
+                                                        <button type="button" class="btn btn-cyan btn-sm">第 @countTime 期</button>
+                                                    }
+                                                    if (q[i].fGetMoneyBack2 != null)
+                                                    {
+                                                        countTime += 1;
+                                                        <button type="button" class="btn btn-success btn-sm">第 @countTime 期</button>
+                                                    }
+                                                    if (q[i].fGetMoneyBack3 != null)
+                                                    {
+                                                        countTime += 1;
+                                                        <button type="button" class="btn btn-danger btn-sm">第 @countTime 期</button>
+                                                    }
+                                                    if (q[i].fGetMoneyBack4 != null)
+                                                    {
+                                                        countTime += 1;
+                                                        <button type="button" class="btn btn-info btn-sm">第 @countTime 期</button>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                for (int i = 1; i < q.Count(); i++)
+                                {
+                                    if (i >= 4)
+                                    {
+                                        break;
+                                    }
+                                    int countTime = 0;
+                                    <div class="comment-widgets scrollable">
+                                        <div class="d-flex flex-row comment-row">
+                                            <div class="p-2"><img src="~/Image/Logo/chow.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                            <div class="comment-text w-100">
+                                                <h6 class="font-medium">訂單編號:  @q[i].fOrderID </h6>
+                                                <span class="m-b-15 d-block">點選下方可對應至的訂單明細喔 </span>
+                                                <div class="comment-footer" id="tcom">
+                                                    <span class="text-muted float-right"> @q[i].fOrderDate.ToString("dd-MM-yyyy")  </span>
+
+                                                    @{
+                                                        if (q[i].fGetMoneyBack1 != null)
+                                                        {
+                                                            countTime += 1;
+                                                            <button type="button" class="btn btn-cyan btn-sm">第 @countTime 期</button>
+                                                        }
+                                                        if (q[i].fGetMoneyBack2 != null)
+                                                        {
+                                                            countTime += 1;
+                                                            <button type="button" class="btn btn-success btn-sm">第 @countTime 期</button>
+                                                        }
+                                                        if (q[i].fGetMoneyBack3 != null)
+                                                        {
+                                                            countTime += 1;
+                                                            <button type="button" class="btn btn-danger btn-sm">第 @countTime 期</button>
+                                                        }
+                                                        if (q[i].fGetMoneyBack4 != null)
+                                                        {
+                                                            countTime += 1;
+                                                            <button type="button" class="btn btn-info btn-sm">第 @countTime 期</button>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        }
+                    </div>
+                    <div class="comment-widgets scrollable">
+                        <!-- Comment Row -->
+                        <!-- Comment Row -->
+                    </div>
+                </div>
+                <!-- Card -->
+
+                @{
+
+
+
+                    List<int> countNumber = new List<int>();
+
+                    for (int i = 0; i < q.Count; i++)
+                    {
+                        var oid = q[i].fOrderID;
+                        var status = db.tChecks.Where(p => p.fOderID == oid).Count();
+                        int percent = 0;
+                        if (status == 1)
+                        {
+                            percent = 10;
+                        }
+                        else
+                        {
+                            percent = status * 100 / 4;
+                        }
+
+                        countNumber.Add(percent);
+                    }
+
+                    string percent0 = "";
+                    string percent1 = "";
+                    string percent2 = "";
+                    string percent3 = "";
+
+                    string spanName0 = "";
+                    string spanName1 = "";
+                    string spanName2 = "";
+                    string spanName3 = "";
+
+                    for (int i = 0; i < q.Count; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                spanName0 = "訂單編號: " + q[0].fOrderID + "的完成度";
+                                percent0 = countNumber[0] + "%";
+                                break;
+                            case 1:
+                                spanName1 = "訂單編號: " + q[1].fOrderID + "的完成度";
+                                percent1 = countNumber[1] + "%";
+                                break;
+                            case 2:
+                                spanName2 = "訂單編號: " + q[2].fOrderID + "的完成度";
+                                percent2 = countNumber[2] + "%";
+                                break;
+                            case 3:
+                                spanName3 = "訂單編號: " + q[3].fOrderID + "的完成度";
+                                percent3 = countNumber[3] + "%";
+                                break;
+                        }
+                    }
+                }
+
+
+            </div>
+            <div class="col-md-6">
+                <!-- card -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title m-b-0">工程進度</h4>
+
+
+                        <div class="m-t-20">
+                            <div class="d-flex no-block align-items-center">
+                                <span>@spanName0</span>
+                                <div class="ml-auto">
+                                    <span>@percent0 </span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @percent0" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex no-block align-items-center m-t-25">
+                                <span>@spanName1</span>
+                                <div class="ml-auto">
+                                    <span>@percent1 </span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @percent1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="d-flex no-block align-items-center m-t-25">
+                                <span>@spanName2</span>
+                                <div class="ml-auto">
+                                    <span>@percent2</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: @percent2" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="d-flex no-block align-items-center m-t-25">
+                                <span>@spanName3</span>
+                                <div class="ml-auto">
+                                    <span>@percent3</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: @percent3" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- card new -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title m-b-0">最新消息</h4>
+                    </div>
+
+                    @{
+                        var news = (from p in db.tNews
+                                    where p.tCustomer.fUserName == customer
+                                    orderby p.fData descending
+                                    select p).Take(5).ToList();
+
+                        string subject = "";
+                        string content = "";
+                        string date = "";
+                        string month = "";
+                        string day = "";
+
+                        string subject1 = "";
+                        string content1 = "";
+                        string date1 = "";
+                        string month1 = "";
+                        string day1 = "";
+
+                        string subject2 = "";
+                        string content2 = "";
+                        string date2 = "";
+                        string month2 = "";
+                        string day2 = "";
+
+                        string subject3 = "";
+                        string content3 = "";
+                        string date3 = "";
+                        string month3 = "";
+                        string day3 = "";
+
+                        string subject4 = "";
+                        string content4 = "";
+                        string date4 = "";
+                        string month4 = "";
+                        string day4 = "";
+
+                        if (news.Count() > 0)
+                        {
+                            for (int i = 0; i < news.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    subject = news[i].fSubject;
+                                    content = news[i].fContent;
+                                    date = news[i].fData.ToString();
+
+
+                                    DateTime datemonth = DateTime.Parse(date);
+                                    month = datemonth.Month.ToString();
+                                    day = datemonth.Day.ToString();
+                                    switch (month)
+                                    {
+                                        case "1":
+                                            month = "Jan";
+                                            break;
+                                        case "2":
+                                            month = "Feb";
+                                            break;
+                                        case "3":
+                                            month = "Mar";
+                                            break;
+                                        case "4":
+                                            month = "Apr";
+                                            break;
+                                        case "5":
+                                            month = "May";
+                                            break;
+                                        case "6":
+                                            month = "Jun";
+                                            break;
+                                        case "7":
+                                            month = "Jul";
+                                            break;
+                                        case "8":
+                                            month = "Aug";
+                                            break;
+                                        case "9":
+                                            month = "Sep";
+                                            break;
+                                        case "10":
+                                            month = "Oct";
+                                            break;
+                                        case "11":
+                                            month = "Nov";
+                                            break;
+                                        case "12":
+                                            month = "Dec";
+                                            break;
+                                    }
+                                }
+                                if (i == 1)
+                                {
+                                    subject1 = news[i].fSubject;
+                                    content1 = news[i].fContent;
+                                    date1 = news[i].fData.ToString();
+                                    DateTime datemonth = DateTime.Parse(date1);
+
+                                    month1 = datemonth.Month.ToString();
+                                    day1 = datemonth.Day.ToString();
+                                    switch (month1)
+                                    {
+                                        case "1":
+                                            month1 = "Jan";
+                                            break;
+                                        case "2":
+                                            month1 = "Feb";
+                                            break;
+                                        case "3":
+                                            month1 = "Mar";
+                                            break;
+                                        case "4":
+                                            month1 = "Apr";
+                                            break;
+                                        case "5":
+                                            month1 = "May";
+                                            break;
+                                        case "6":
+                                            month1 = "Jun";
+                                            break;
+                                        case "7":
+                                            month1 = "Jul";
+                                            break;
+                                        case "8":
+                                            month1 = "Aug";
+                                            break;
+                                        case "9":
+                                            month1 = "Sep";
+                                            break;
+                                        case "10":
+                                            month1 = "Oct";
+                                            break;
+                                        case "11":
+                                            month1 = "Nov";
+                                            break;
+                                        case "12":
+                                            month1 = "Dec";
+                                            break;
+                                    }
+                                }
+                                if (i == 2)
+                                {
+                                    subject2 = news[i].fSubject;
+                                    content2 = news[i].fContent;
+                                    date2 = news[i].fData.ToString();
+
+                                    DateTime datemonth = DateTime.Parse(date2);
+                                    month2 = datemonth.Month.ToString();
+                                    day2 = datemonth.Day.ToString();
+                                    switch (month2)
+                                    {
+                                        case "1":
+                                            month2 = "Jan";
+                                            break;
+                                        case "2":
+                                            month2 = "Feb";
+                                            break;
+                                        case "3":
+                                            month2 = "Mar";
+                                            break;
+                                        case "4":
+                                            month2 = "Apr";
+                                            break;
+                                        case "5":
+                                            month2 = "May";
+                                            break;
+                                        case "6":
+                                            month2 = "Jun";
+                                            break;
+                                        case "7":
+                                            month2 = "Jul";
+                                            break;
+                                        case "8":
+                                            month2 = "Aug";
+                                            break;
+                                        case "9":
+                                            month2 = "Sep";
+                                            break;
+                                        case "10":
+                                            month2 = "Oct";
+                                            break;
+                                        case "11":
+                                            month2 = "Nov";
+                                            break;
+                                        case "12":
+                                            month2 = "Dec";
+                                            break;
+                                    }
+                                }
+                                if (i == 3)
+                                {
+                                    subject3 = news[i].fSubject;
+                                    content3 = news[i].fContent;
+                                    date3 = news[i].fData.ToString();
+
+                                    DateTime datemonth = DateTime.Parse(date3);
+                                    month3 = datemonth.Month.ToString();
+                                    day3 = datemonth.Day.ToString();
+                                    switch (month3)
+                                    {
+                                        case "1":
+                                            month3 = "Jan";
+                                            break;
+                                        case "2":
+                                            month3 = "Feb";
+                                            break;
+                                        case "3":
+                                            month3 = "Mar";
+                                            break;
+                                        case "4":
+                                            month3 = "Apr";
+                                            break;
+                                        case "5":
+                                            month3 = "May";
+                                            break;
+                                        case "6":
+                                            month3 = "Jun";
+                                            break;
+                                        case "7":
+                                            month3 = "Jul";
+                                            break;
+                                        case "8":
+                                            month3 = "Aug";
+                                            break;
+                                        case "9":
+                                            month3 = "Sep";
+                                            break;
+                                        case "10":
+                                            month3 = "Oct";
+                                            break;
+                                        case "11":
+                                            month3 = "Nov";
+                                            break;
+                                        case "12":
+                                            month3 = "Dec";
+                                            break;
+                                    }
+                                }
+                                if (i == 4)
+                                {
+                                    subject4 = news[i].fSubject;
+                                    content4 = news[i].fContent;
+                                    date4 = news[i].fData.ToString();
+
+                                    DateTime datemonth = DateTime.Parse(date4);
+                                    month4 = datemonth.Month.ToString();
+                                    day4 = datemonth.Day.ToString();
+                                    switch (month4)
+                                    {
+                                        case "1":
+                                            month4 = "Jan";
+                                            break;
+                                        case "2":
+                                            month4 = "Feb";
+                                            break;
+                                        case "3":
+                                            month4 = "Mar";
+                                            break;
+                                        case "4":
+                                            month4 = "Apr";
+                                            break;
+                                        case "5":
+                                            month4 = "May";
+                                            break;
+                                        case "6":
+                                            month4 = "Jun";
+                                            break;
+                                        case "7":
+                                            month4 = "Jul";
+                                            break;
+                                        case "8":
+                                            month4 = "Aug";
+                                            break;
+                                        case "9":
+                                            month4 = "Sep";
+                                            break;
+                                        case "10":
+                                            month4 = "Oct";
+                                            break;
+                                        case "11":
+                                            month4 = "Nov";
+                                            break;
+                                        case "12":
+                                            month4 = "Dec";
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    <ul class="list-style-none">
+                        <li class="d-flex no-block card-body">
+                            <i class="fa fa-check-circle w-30px m-t-5"></i>
+                            <div>
+                                <a href="#" class="m-b-0 font-medium p-0">@subject</a>
+                                <span class="text-muted">@content</span>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@day</h5>
+                                    <span class="text-muted font-16">@month</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex no-block card-body border-top">
+                            <i class="fa fa-gift w-30px m-t-5"></i>
+                            <div>
+                                <a href="#" class="m-b-0 font-medium p-0">@subject1</a>
+                                <span class="text-muted">@content1</span>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@day1</h5>
+                                    <span class="text-muted font-16">@month1</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex no-block card-body border-top">
+                            <i class="fa fa-plus w-30px m-t-5"></i>
+                            <div>
+                                <a href="#" class="m-b-0 font-medium p-0">@subject2</a>
+                                <span class="text-muted">@content2</span>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@day2</h5>
+                                    <span class="text-muted font-16">@month2</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex no-block card-body border-top">
+                            <i class="fa fa-leaf w-30px m-t-5"></i>
+                            <div>
+                                <a href="#" class="m-b-0 font-medium p-0">@subject3</a>
+                                <span class="text-muted">@content3</span>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@day3</h5>
+                                    <span class="text-muted font-16">@month3</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex no-block card-body border-top">
+                            <i class="fa fa-question-circle w-30px m-t-5"></i>
+                            <div>
+                                <a href="#" class="m-b-0 font-medium p-0">@subject4</a>
+                                <span class="text-muted">@content4</span>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@day4</h5>
+                                    <span class="text-muted font-16">@month4</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN MODAL -->
+        <div class="modal none-border" id="my-event">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><strong>Add Event</strong></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
+                        <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Add Category -->
+        <div class="modal fade none-border" id="add-new-event">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><strong>Add</strong> a category</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="control-label">Category Name</label>
+                                    <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Choose Category Color</label>
+                                    <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                        <option value="success">Success</option>
+                                        <option value="danger">Danger</option>
+                                        <option value="info">Info</option>
+                                        <option value="primary">Primary</option>
+                                        <option value="warning">Warning</option>
+                                        <option value="inverse">Inverse</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MODAL -->
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+}
+else
+{
+    @Html.Partial("_unauthorizedPartial")
+}

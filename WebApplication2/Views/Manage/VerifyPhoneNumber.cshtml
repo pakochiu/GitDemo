@@ -1,0 +1,45 @@
+﻿@model WebApplication2.Models.VerifyPhoneNumberViewModel
+@{
+    ViewBag.Title = "Verify Phone Number";
+}
+
+    <link href="~/Content/LoginPage.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Microsoft JhengHei';
+    }
+</style>
+<div class="Detail">
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">驗證你的手機號碼</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"> </label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+
+                    @using (Html.BeginForm("VerifyPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("phoneNumber", @Model.PhoneNumber)
+                        <h4></h4>
+                        <h5>@ViewBag.Status</h5>
+                        <hr />
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="group">
+                            @Html.LabelFor(m => m.Code, new { @class = "LLlabel" })
+                                @Html.TextBoxFor(m => m.Code, new { @class = "input" })
+                        </div>
+                        <div class="group">
+                                <input type="submit" class="button" value="Submit" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

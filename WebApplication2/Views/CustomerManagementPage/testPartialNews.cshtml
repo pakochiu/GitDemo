@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApplication2.tNew>
+
+@{ 
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fSubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tCustomer.fUserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fSubject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fData)
+        </td>
+    </tr>
+}
+
+</table>
